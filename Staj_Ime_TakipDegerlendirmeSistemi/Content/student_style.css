@@ -1,0 +1,1383 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&family=Roboto+Flex:opsz,wght@8..144,100;8..144,300;8..144,400;8..144,500&family=Roboto:wght@100;300;400&display=swap');
+
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
+
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@import 'bootstrap.min.css';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    font-family:"Roboto",sans-serif;
+    font-weight:300;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 8px;
+    border-radius: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    height: 180px;
+    border-radius: 8px;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+        border-radius: 8px;
+    }
+
+
+
+
+
+
+
+
+
+
+/*Student login sayfası*/
+
+
+
+.student-login.student-login-bg {
+    width: 100%;
+    height: 100vh;
+    /*background: linear-gradient( 135deg, rgba(36, 46, 77, .9), rgba(137, 126, 121, .9) );*/
+    background: url(../files/wp8.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.student-login.student-login-bg::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(0,0,0,0.8);
+}
+
+
+/*Student Login geri dön butonu stili*/
+#geriDon {
+    position: fixed;
+    z-index: 11;
+    top: 80px;
+    left: 130px;
+    background: rgb(48, 79, 254);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 11px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    transition: all .1s linear;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+#geriDon div{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding-bottom:2px;
+  
+}
+#geriDon i{
+    font-size:18px;
+    margin-right:6px;
+}
+
+#geriDon:hover{
+    background: rgb(26 56 225);
+}
+
+
+
+.student-login .form-container {
+  
+    position: relative;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 600px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-family: "Roboto",sans-serif;
+    font-weight:300;
+    /* border: solid 6px rgba(0,0,0,0.6);*/
+}
+
+.student-login .form-container::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(26,32,53,.8);
+    border-radius: 8px;
+}
+
+
+.student-login .form-container form{
+
+    position:relative;
+    width:98%;
+    padding:6px;
+    margin:8px;
+    height:90%;
+    border-radius:8px;
+    margin-top:108px;
+}
+
+.student-login .custom-input {
+    width: 80%;
+    background: rgba(255,255,255,.1);
+    border: none;
+    height: 56px;
+    border-radius: 0 30px 30px 0;
+    font-size: 21px;
+    color: white;
+    padding-left: 3px;
+    position: relative;
+}
+
+.student-login .custom-input:focus {
+    border:none;
+    outline:none;
+    background: rgba(255,255,255,.1);
+    box-shadow:none;
+    color:white;
+}
+
+.student-login .custom-label {
+    display: flex;
+    align-items: center;
+    width: 86%;
+    font-size: 20px;
+    color: white;
+}
+
+.student-login .input-icon {
+    font-size: 23px;
+    width: 11%;
+    background: rgba(255,255,255,.06);
+    border-radius: 30px 0 0 30px;
+    color: white;
+}
+
+.student-login .input-container {
+    width: 100%;
+}
+
+
+.student-login .floating-label {
+    position: absolute;
+}
+
+
+
+
+.student-login .main-input-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+
+.student-login .form-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    font-size: 33px;
+    top: -28px;
+    border-radius: 11px;
+    background: rgb(183, 28, 28);
+    height: 110px;
+    width: 460px;
+    color: white;
+    font-family: "Roboto",sans-serif;
+    font-weight: 400;
+}
+
+
+.student-login .custom-button {
+    display: block;
+    height: 60px;
+    width: 90%;
+    border: none;
+    background-color: rgb(21 142 30);
+    border-radius: 30px;
+    margin: 50px auto 16px auto;
+    color: white;
+    font-size: 23px;
+    transition: all 0.1s linear;
+}
+
+.student-login .custom-button:hover{
+    background-color: rgb(25 165 36);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.student-login .stripe {
+    width: 90%;
+    height: 4px;
+    background: #102027;
+    position: relative;
+    top: -16px;
+    border-radius: 13px;
+}
+
+
+
+
+.student-login .validation-container {
+    width: 90%;
+    padding-left: 8px;
+    height: 23px;
+}
+
+.student-login .field-validation-error {
+    color: #ef5350;
+    font-size: 18px;
+}
+
+.student-login .input-validation-error {
+    border: solid 1px #b71c1c;
+}
+
+.student-login .input-validation-error:focus {
+    border: solid 1px #b71c1c;
+     background: rgba(255,255,255,.1);
+}
+
+
+
+
+
+
+/*Şifremi Unuttum stili*/
+
+
+.wrapper {
+    background-color: rgb(201 201 201);
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+}
+
+.sifremiUnuttumForm{
+    margin-top:38px;
+  
+}
+
+.sifremiUnuttumForm .main-input-container .custom-label {
+    font-size: 18px;
+    margin-bottom: 3px;
+    color: black;
+}
+
+.sifremiUnuttumForm .main-input-container .input-container {
+    width: 100%;
+}
+
+.sifremiUnuttumForm .main-input-container .input-container .custom-input{
+    padding:11px;
+    background:rgb(38, 50, 56);
+    border:none;
+    border-radius:3px;
+    color:white;
+    width:100%;
+    font-size:16px;
+}
+
+.sifremiUnuttumForm .main-input-container .input-container .custom-input:focus{
+    border:none;
+    outline:none;
+}
+
+
+
+.sifremiUnuttumForm .main-input-container .validation-container{
+    height:13px;
+    color:red;
+}
+
+.sifremiUnuttumForm .sendEmailButtonContainer{
+   
+    width:100%;
+}
+
+.sifremiUnuttumForm #sendEmailButton{
+    width:100%;
+   
+    padding:13px;
+    
+    border-radius:4px;
+     font-family: "Roboto",sans-serif;
+    font-weight: 300;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*Öğrenci Anasayfası stili*/
+
+.student-index .wrapper {
+    background-color: rgb(201 201 201);
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap:wrap;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+}
+
+
+
+
+/*İstatistik kartı stili*/
+.card {
+    border: none;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+}
+
+.card-header{
+    border-bottom:none;
+    
+}
+.card-header h3 {
+    
+    margin-top: 6px;
+    font-weight: 300;
+    color: #3c4858;
+}
+
+.card-stats {
+    position: relative;
+   
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.card .card-header-success .card-icon {
+    background: linear-gradient(60deg,#16A34A,#22C55E);
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(34 197 94 / 40%);
+}
+
+.card .card-header-warning .card-icon {
+    background: linear-gradient(60deg,#ffa726,#FACC15);
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(250 204 21 / 40%);
+}
+
+.card .card-header-danger .card-icon {
+    background: linear-gradient(60deg,#B91C1C,#DC2626);
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(220 38 38 / 40%);
+}
+
+.card .card-header-blue .card-icon {
+    background: linear-gradient(60deg,#1D4ED8,#2563EB);
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(37 99 235 / 40%);
+}
+
+
+
+.card .card-icon {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -21px;
+    width: 86px;
+    height: 86px;
+    color: white;
+    
+    border-radius: 3px;
+}
+
+.card .card-header p{
+    margin:3px;
+    font-weight:300;
+    font-size:18px;
+}
+
+
+
+.card .card-icon i{
+    
+   font-size:43px;
+}
+
+.card .card-footer{
+    border-top:none;
+}
+.card .card-footer::before{
+    content:"";
+    text-align:center;
+    position:absolute;
+    border-radius:8px;
+    width:90%;
+    background:rgba(0,0,0,0.3);
+    height:1px;
+}
+
+.card-footer .stats{
+    display:flex;
+    justify-content:start;
+    align-items:center;
+    padding:13px 6px 8px 4px;
+    
+}
+
+.card-footer .stats i{
+     margin-right: 8px;
+}
+
+.card-footer .stats a {
+    margin-left:6px;
+    text-decoration:none;
+    color:#333;
+
+}
+
+
+/*Table stili*/
+
+.card.card-table {
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+}
+
+.card-table .card-header-danger {
+    margin: auto;
+    color: white;
+    position: relative;
+    background: linear-gradient(60deg,#1D4ED8,#2563EB);
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(29 78 216 / 40%);
+    width: 96%;
+    border-radius: 3px !important;
+    top: -18px;
+}
+
+.card-table .card-header-danger h4 {
+     margin: 6px 1px 6px 1px;
+     font-size: 23px;
+     font-weight: 300;
+}
+
+.card-table .table-responsive th {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.card-table .table-responsive {
+    padding: 0px 28px 8px 28px;
+}
+
+.table > :not(caption) > * > * {
+    padding: 8px;
+}
+
+.card-table table td {
+    vertical-align: middle;
+}
+
+
+.card-table .update-link {
+    color: #8F25AB;
+}
+
+.card-table .delete-link {
+    color: #E81123;
+}
+
+.card-table img {
+    object-fit: cover;
+    width: 83px;
+    height: 83px;
+    border-radius: 3px;
+}
+
+
+
+
+
+/*Tab panel stili*/
+
+.card.card-panel-table {
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+
+}
+
+.card-panel-table .card-header-success {
+
+    background: linear-gradient(60deg,#16A34A,#22C55E);
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(34 197 94 / 40%);
+}
+
+.card-panel-table .card-header-danger {
+    background: linear-gradient(60deg,#E81123,#E11D48);
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(232 17 35 / 40%);
+}
+
+
+.card-panel-table .card-header-warning {
+    background: linear-gradient(60deg,#daa000,#FFB900);
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(255 185 0 / 40%);
+}
+
+.card-panel-table .card-header {
+    margin: auto;
+    color: white;
+    position: relative;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+    width: 96%;
+    border-radius: 3px !important;
+    top: -18px;
+    padding: 16px;
+    
+}
+
+.card-panel-table .card-header-danger h4{
+    margin:6px 1px 6px 1px;
+    font-size:23px;
+    font-weight:300;
+}
+
+.card-panel-table .table-responsive th {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.card-panel-table .table-responsive {
+    padding: 0px 28px 8px 28px;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+}
+
+.table > :not(caption) > * > * {
+    padding:8px;
+}
+
+.card-panel-table table td {
+    vertical-align: middle;
+}
+
+
+.card-panel-table .update-link {
+    color: #8F25AB;
+}
+
+.card-panel-table .delete-link {
+    color: #E63B37;
+}
+
+.card-panel-table img {
+    object-fit: cover;
+    width: 83px;
+    height: 83px;
+    border-radius: 3px;
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: rgb(38, 50, 56);
+    --bs-tooltip-color: white;
+    --bs-tooltip-padding-x: 18px;
+    --bs-tooltip-padding-y: 13px;
+}
+
+.card-panel-table .nav-item{
+    margin:1px;
+  
+}
+
+
+.card-panel-table .nav-item i{
+    font-size:18px;
+    margin-right:6px;
+  
+}
+
+.card-panel-table .nav-link {
+    height: 44px;
+    width: 135px;
+    color: white;
+    border-radius: 3px;
+    background: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-panel-table .nav-link.active{
+    background:rgba(255,255,255,0.3);  
+}
+
+
+
+.add-documents-link {
+    border: none;
+    background: none;
+    font-size: 21px;
+    padding: 3px;
+    color: green;
+}
+
+
+
+
+
+
+
+/*Index sayfası yeni başvuru butonu stili*/
+
+.yeniBasvuruIndexButon {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    border-radius: 180px;
+    bottom: 40px;
+    right: 260px;
+    cursor:pointer;
+
+}
+
+.yeniBasvuruIndexButon a{
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    border:none;
+    background:#16A34A;
+    border-radius:180px;
+}
+
+.yeniBasvuruIndexButon a i{
+    color:white;
+    font-size:48px;
+
+}
+
+
+
+
+
+/*Accordion stili*/
+/*Accordion Başlık*/
+
+.accordionBaslik {
+    background: linear-gradient(60deg,#6D28D9,#7C3AED);
+    color: white;
+    padding: 19px;
+    font-size: 18px;
+    border-radius: 3px;
+    width: 96%;
+    margin: auto;
+    margin-bottom: 8px;
+}
+
+
+
+
+/*Doküman Tabpanel stili*/
+
+#myPdfTab{
+    padding: 14px;
+    background: #BE123C;
+    color: white;
+    border-radius: 3px;
+    margin-top:-18px;
+    margin-bottom:13px;
+}
+
+#myPdfTab .nav-link,
+#imePdfs .nav-link{
+    background:none;
+    color:white;
+}
+
+#myPdfTab .nav-link.active,
+#imePdfs .nav-link.active{
+     background:rgba(255,255,255,0.3);
+     border-radius: 3px;
+}
+
+#myPdfTab .nav-link i,
+#imePdfs .nav-link i{
+    font-size:21px;
+    margin-right:6px;   
+}
+
+
+
+#stajPdfs, #imePdfs {
+    background: white;
+    height: 390px;
+    border-radius: 3px;
+    font-size: 17px;
+}
+
+#stajPdfs .row,
+#imePdfs .row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:7px;
+    margin:1px 3px 1px 3px;
+    border-radius:3px;
+}
+
+#stajPdfs .row:hover,
+#imePdfs .row:hover{
+    background-color:#CBD5E1;
+   
+}
+
+
+#stajPdfs .red,.blue,.green,
+#imePdfs .red,.blue,.green{
+    font-size:23px;
+}
+
+#stajPdfs .red,
+#imePdfs .red{
+    color:#DC2626;
+}
+
+#stajPdfs .blue,
+#imePdfs .blue{
+    color:#2563EB;
+}
+
+#stajPdfs .green,
+#imePdfs .green{
+    color:#16A34A;
+}
+
+
+
+
+
+
+
+
+
+
+/*Öğrenci Profil Stili*/
+
+.student-profile .wrapper {
+    background-color: rgb(201 201 201);
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+}
+
+/*Profil kısmı stili*/
+.card-student-profile {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+}
+
+.card-student-profile .card-avatar{
+    padding:18px;
+    position:relative;
+    display:flex;
+    justify-content:center;
+}
+
+.card-student-profile .image-input-container{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    width:30%;
+    height:88px;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+}
+
+.card-student-profile .image-input-container label{
+    position:absolute;
+    border-radius:38px;
+    width:43px;
+    height:43px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    bottom:0;
+ 
+    right:0px;
+    border:solid 3px white;
+    cursor:pointer;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+
+}
+
+.card-student-profile .image-input-container label i{
+    
+    font-size:23px;
+    color:white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.card-student-profile .card-avatar img{
+    top:-48px;
+    position:absolute;
+    width:140px;
+    height:140px;
+    border-radius:380px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    object-fit:cover;
+}
+
+.card-student-profile #profilResmiInput{
+    display:none;
+}
+
+
+
+
+
+.card-student-profile .card-body{
+    text-align:center;
+}
+
+.card-profile-input-container {
+    position: relative;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+}
+
+
+.card-profile-input-container .card-header-danger{
+
+    margin: auto;
+    color: white;
+    position: relative;
+    background: linear-gradient(60deg,#1E40AF,#1D4ED8);
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(29 78 216 / 60%);
+    width: 96%;
+    border-radius: 3px !important;
+    top: -18px;
+    
+}
+
+.card-profile-input-container .card-header-danger h4{
+     margin:6px 1px 6px 1px;
+    font-size:23px;
+    font-weight:300;
+}
+
+.card-profile-input-container .card-body{
+
+
+
+}
+
+.card-profile-input-container .zorunlu-alan-icon{
+    position: absolute;
+    color: white;
+    z-index: 11;
+    font-size: 13px;
+    background: rgb(213, 0, 0);
+    padding: 3px;
+    border-radius: 18px;
+    border: solid 3px white;
+    left: 0;
+    top:-7px;
+}
+
+
+
+
+
+.profile-main-input-container {
+    position:relative;
+  
+    transition: all .2s linear;
+   
+
+}
+
+.profile-main-input-container .custom-input{
+    color:black;
+    box-shadow:none;
+    border:none;
+    padding-left:0px;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+    color: #3c4858;
+   border-radius:0 4px 4px 0;
+   
+}
+.profile-main-input-container .custom-input.disabled{
+     background:rgba(0, 0, 0, 0.22);
+}
+
+.profile-main-input-container .input-container{
+      border-bottom:solid 3px rgb(96, 125, 139);
+      
+    
+}
+
+.profile-main-input-container .input-line{
+    width:0;
+    height:3px;
+   
+    background:green;
+    transition:all .1s linear;
+}
+
+.profile-main-input-container .input-icon{
+    border-radius:4px 0px 0px 4px;
+     font-size:23px;
+     width:68px;
+    
+}
+
+.profile-main-input-container .input-icon.disabled{
+    background:rgba(0, 0, 0, 0.22);
+}
+
+.profile-main-input-container .custom-label{
+    padding-left:36px;
+}
+
+.profile-main-input-container .validation-container{
+    color:#ef5350;
+    font-size:18px;
+    padding-left:13px;
+    height:36px;
+}
+
+.student-profile .custom-button{
+    background: rgb(32,64, 248);
+    color: white;
+    text-decoration: none;
+    padding: 13px;
+    border-radius: 38px;
+    border:none;
+    width:100%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    transition: all .2s linear;
+}
+
+.student-profile .custom-button:hover{
+    color:white;
+    background: rgb(48, 79, 254);
+    
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+
+.student-profile form {
+    height: 630px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+
+
+
+
+
+
+/*Başvuru Pdf'i oluşturma stili*/
+
+
+.pdfCreateButton {
+    background: #16A34A;
+    border: none;
+    padding: 13px;
+    color: white;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    transition:all .1s linear;
+}
+
+.pdfCreateButton:hover{
+    background:#15803D;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+
+
+
+
+/*Başvuru Oluştur Sayfası stili*/
+
+
+.basvuru-olustur-form {
+    
+    background: white;
+    border-radius: 4px;
+    width: 40%;
+    padding: 21px;
+    margin:80px auto 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+#basvuruPdf {
+    display: block;
+}
+
+.custom-pdf-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0F172A;
+    width: 230px;
+    height: 60px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 26px;
+    color: white;
+    transition: all .1s linear;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.custom-pdf-label:hover{
+    background:#1E293B;
+    color:#BE123C;
+
+}
+
+
+.custom-dropdown {
+    padding: 16px;
+    border: none;
+    outline: none;
+    width: 260px;
+    background: #212529;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+
+.custom-basvuru-button {
+    width: 190px;
+    height: 50px;
+    background: #1D4ED8;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+   
+    transition: all .1s linear;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.custom-basvuru-button:hover{
+    background:#2563EB;
+}
+
+.basvuru-olustur-form .validation-container {
+    color: #BE123C;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Header stili*/
+
+header {
+    font-family:"Roboto",sans-serif;
+    font-weight:300;
+    position: sticky;
+    top: 6px;
+    left: 0;
+    right: 0;
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(22 163 74 / 40%);
+    padding: 0px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    color: white;
+    background: linear-gradient(60deg, #16A34A, #22C55E);
+    border-radius:3px;
+}
+
+header a{
+    text-decoration:none;
+}
+
+header .logo {
+    font-weight: 300;
+    font-size: 25px;
+    color: white;
+}
+
+header .header-navbar {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+header .header-navbar ul {
+    list-style: none;
+    transition: all .3s linear;
+    margin:0;
+}
+
+header .header-navbar ul li {
+    position: relative;
+    float: left;
+
+}
+
+header .header-navbar ul li a {
+    font-size: 18px;
+    width:160px;
+    text-align:center;
+    padding: 18px;
+    color: white;
+    display: block;
+    transition:all .1s linear;
+}
+
+header .header-navbar ul li a:hover {
+    background: #1D4ED8;
+    color: white;
+}
+
+header .header-navbar .drop-down {
+   
+    margin-top:0px;
+    position: absolute;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    left: 0px;
+    width: 160px;
+    background: #fff;
+    padding:6px;
+    border-radius:4px;
+    border:none;
+    box-shadow: 0 4px 18px 0 rgb(0 0 0 / 12%), 0 7px 10px -5px rgb(0 0 0 / 15%);
+}
+
+header .header-navbar .drop-down-item{
+    position:relative;
+    width:100%;
+   
+}
+
+
+header .header-navbar .drop-down-link{
+    position:relative;
+    width:100%;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    padding:8px;
+    background: #FFFF;
+    color: #2b2b2b;
+    border:none;
+    border-radius:4px;
+}
+
+header .header-navbar ul li:hover .drop-down {
+   display:initial;
+}
+
+
+/*header responsive*/
+
+@media(max-width:991px) {
+    header {
+        padding: 20px;
+    }
+}
+
+
+/*footer css code*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+ul {
+    list-style: none;
+}
+
+
+.footer-container {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.footer-container ul{
+    padding:0;
+}
+
+.footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    padding:0;
+    margin:0;
+}
+
+.footer {
+    background-color: #24262b;
+    padding: 70px 0;
+    line-height: 1;
+    width:100%; 
+    font-family: 'Roboto', sans-serif;
+    font-weight:300;
+    
+}
+
+.footer-col {
+    width: 25%;
+    height:20%;
+    padding: 0 15px;
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 7px;
+}
+
+.footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-right: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+}
+
+
+/*footer responsive*/
+
+@media(max-width: 767px) {
+    .footer-col {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width: 574px) {
+    .footer-col {
+        width: 100%;
+    }
+}
+
+

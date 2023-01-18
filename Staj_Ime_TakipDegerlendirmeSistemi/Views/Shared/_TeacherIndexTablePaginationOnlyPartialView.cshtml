@@ -1,0 +1,143 @@
+﻿@model Staj_Ime_TakipDegerlendirmeSistemi.Models.TeacherPaginationOnlyViewModel
+
+<table class="table table-hover ">
+    <thead class="text-warning">
+        <tr>
+            <th scope="col"><b>#</b></th>
+            <th>Başvuran Öğrenci</th>
+            <th>Başvuru Türü</th>
+            <th>Değerlendiren Öğretmen</th>
+            @*<th>Başvuru Durumu</th>*@
+            <th>Dönem</th>
+
+            <th colspan="3">Belgeler</th>
+            <th>Başvuru Tarihi</th>
+            <th>Başarı Notu</th>
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            int sayac1 = Model.numeration;
+
+            foreach (var basvuru in Model.basvurular)
+            {
+                <tr>
+                    <td scope="col"><b>@sayac1</b></td>
+
+                    <td><button class="info-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Öğrenci Bilgileri" student-id="@basvuru.Kullanicilar.ID"><i class="fa-solid fa-info"></i></button></td>
+
+                    <td>@basvuru.BasvuruTuru.BasvuruAdi</td>
+                    <td>
+                        @if (basvuru.Kullanicilar1 != null)
+                        {
+                            @(basvuru.Kullanicilar1.Adi + " " + basvuru.Kullanicilar1.Soyadi)
+                        }
+                        else
+                        {
+                            @("Atanmadı")
+                        }
+                    </td>
+
+                    @*<td>@basvuru.BasvuruDurum.DurumAdi</td>*@
+                    <td>@basvuru.Donem</td>
+
+
+
+                    @foreach (var belge in basvuru.Belgeler)
+                    {
+                        switch (basvuru.BasvuruTuru.ID)
+                        {
+                            case 1:
+                                switch (belge.BelgeTurleri.ID)
+                                {
+                                    case 1:
+                                        <td><a href="~/uploads/applications/StajI/@belge.BelgeAdresi"><i class="fa-solid fa-file text-success fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Başvuru ve Kabul Formu"></i></a></td>
+                                        break;
+                                    case 2:
+                                        <td><a href="~/uploads/applications/StajI/@belge.BelgeAdresi"><i class="fa-solid fa-file text-success fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Değerlendirme Formu"></i></a></td>
+                                        break;
+                                    case 3:
+                                        <td><a href="~/uploads/applications/StajI/@belge.BelgeAdresi"><i class="fa-solid fa-file text-success fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Raporu"></i></a></td>
+                                        break;
+
+                                }
+                                break;
+                            case 2:
+
+                                switch (belge.BelgeTurleri.ID)
+                                {
+                                    case 1:
+                                        <td><a href="~/uploads/applications/StajII/@belge.BelgeAdresi"><i class="fa-solid fa-file text-success fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Başvuru ve Kabul Formu"></i></a></td>
+                                        break;
+                                    case 2:
+                                        <td><a href="~/uploads/applications/StajII/@belge.BelgeAdresi"><i class="fa-solid fa-file text-success fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Değerlendirme Formu"></i></a></td>
+                                        break;
+                                    case 3:
+                                        <td><a href="~/uploads/applications/StajII/@belge.BelgeAdresi"><i class="fa-solid fa-file text-success fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Raporu"></i></a></td>
+                                        break;
+
+                                }
+                                break;
+
+                            case 3:
+                                switch (belge.BelgeTurleri.ID)
+                                {
+                                    case 1:
+                                        <td><a href="~/uploads/applications/Ime/@belge.BelgeAdresi"><i class="fa-solid fa-file text-success fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Başvuru ve Kabul Formu"></i></a></td>
+                                        break;
+                                    case 2:
+                                        <td><a href="~/uploads/applications/Ime/@belge.BelgeAdresi"><i class="fa-solid fa-file text-success fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Değerlendirme Formu"></i></a></td>
+                                        break;
+                                    case 3:
+                                        <td><a href="~/uploads/applications/Ime/@belge.BelgeAdresi"><i class="fa-solid fa-file text-success fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Raporu"></i></a></td>
+                                        break;
+
+                                }
+                                break;
+
+
+                        }
+
+                    }
+
+                    @if (basvuru.Belgeler.Count == 1)
+                    {
+                        <td> <i class="fa-solid fa-file-circle-xmark text-danger fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Değerlendirme Formu"></i></td>
+                        <td> <i class="fa-solid fa-file-circle-xmark text-danger fs-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Staj Raporu"></i></td>
+
+                    }
+                    <td>@basvuru.BasvuruTarih</td>
+
+                    <td>
+                        @if (basvuru.BasariNotu == null)
+                        {
+                            @("Notlandırılmadı")
+                        }
+                        else
+                        {
+                            @(basvuru.BasariNotu)
+                        }
+                    </td>
+
+                    @if (basvuru.BasvuruDurumu == 2)
+                    {
+                        <td><button class="onayla-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Onayla" basvuru-id="@basvuru.ID"><i class="fa-solid fa-check"></i></button></td>
+                        <td><button class="reddet-link" basvuru-id="@basvuru.ID" data-bs-toggle="tooltip" data-bs-placement="top" title="Reddet" href=""><i class="fa-solid fa-xmark"></i></button></td>
+                    }
+
+                </tr>
+                sayac1++;
+            }
+
+
+
+
+        }
+
+
+    </tbody>
+</table>
+

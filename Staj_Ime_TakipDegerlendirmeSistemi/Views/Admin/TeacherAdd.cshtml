@@ -1,0 +1,536 @@
+﻿@using System.Web.Helpers
+@using Staj_Ime_TakipDegerlendirmeSistemi.Models
+
+@model TeacherAddViewModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Öğretmen İşlemleri</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link rel="icon" href="~/files/ms-icon-310x310.png" type="image/x-icon">
+</head>
+<body>
+    <div class="wrapper">
+
+        @Html.Partial("_AdminSidebarPartialView")
+
+        <div class="main-panel">
+
+
+            @Html.Partial("_AdminNavbarPartialView", "Öğretmen İşlemleri")
+
+
+            <div class="content">
+                <div class="container-fluid ">
+
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="card card-student-add">
+                                <div class="card-header card-header-danger" style="background: #1D4ED8;">
+                                    <h4 class="card-title">
+                                        Yeni Öğretmen Ekle
+                                    </h4>
+                                    <p class="card-category">
+
+                                    </p>
+                                </div>
+
+                                <div class="card-body">
+
+
+                                    <div class="student-add form-container ">
+
+
+                                        @using (Html.BeginForm("TeacherAdd", "Admin", FormMethod.Post, new { @class = "", enctype = "multipart/form-data" }))
+                                        {
+
+                                            <div id="toast-valSum" class="toast position-fixed top-0 start-50 translate-middle fs-5 bg-danger text-white border-0" style="width:600px; margin-top:68px;">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="toast-body d-flex align-items-center">
+                                                        @if (ViewBag.error != null)
+                                                        {
+                                                            <span> @ViewBag.error</span>
+
+                                                        }
+
+                                                    </div>
+                                                    <button class="btn btn-close btn-close-white m-auto me-2" type="button" data-bs-dismiss="toast"></button>
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <div id="toast-result" class="toast position-fixed top-0 start-50 translate-middle fs-5 bg-success text-white border-0 p-2" style="width: 600px; margin-top: 68px;">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="toast-body d-flex align-items-center">
+                                                        @if (ViewBag.result != null)
+                                                        {
+                                                            <span> @ViewBag.result</span>
+
+                                                        }
+                                                    </div>
+                                                    <button class="btn btn-close btn-close-white m-auto me-2" type="button" data-bs-dismiss="toast"></button>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="row d-flex justify-content-center mb-4">
+                                                <div class="col-3 d-flex justify-content-center">
+                                                    <div class="image-input-container">
+                                                        <img class="" src="~/files/person.png" title="Profil Resmi Önizlemesi" id="profilResmiImage" />
+
+                                                        <input type="file" name="profilResmi" id="profilResmiInput" accept="image/*" />
+                                                        <label for="profilResmiInput" class="bg-danger">
+                                                            <i class="fa-solid fa-camera"></i>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row d-flex align-items-center m-3 ps-5">
+                                                <div class="col-3 position-relative ms-5"> <i class="fa-solid fa-star-of-life zorunlu-alan-icon me-5"></i> &nbsp;&nbsp;&nbsp; Girilmesi Zorunlu Alandır.</div>
+
+                                            </div>
+
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                                    <div class="main-input-container">
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.teacher.TCNo, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.teacher.TCNo, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-ad" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.teacher.TCNo, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                                    <div class="main-input-container">
+                                                        <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.teacher.Adi, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.teacher.Adi, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-ad" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.teacher.Adi, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                                    <div class="main-input-container">
+
+                                                        <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.teacher.Soyadi, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.teacher.Soyadi, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-soyad" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.teacher.Soyadi, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="row mt-3 d-flex justify-content-center">
+                                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                                    <div class="main-input-container">
+                                                        <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-envelope"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.teacher.Email, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.teacher.Email, new { @class = "custom-label ms-3" })
+
+                                                        </div>
+
+                                                        <div id="validation-email" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.teacher.Email, "")
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                                    <div class="main-input-container">
+                                                        <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-envelope"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.teacher.Sifre, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.teacher.Sifre, new { @class = "custom-label ms-3" })
+
+                                                        </div>
+
+                                                        <div id="validation-email" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.teacher.Sifre, "")
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                                    <div class="main-input-container">
+
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-phone"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.teacher.Telefon, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.teacher.Telefon, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-telefon" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.teacher.Telefon, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="row mt-4 d-flex justify-content-center">
+                                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                                    <div class="main-input-container">
+
+
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-layer-group"></i>
+                                                            </div>
+
+                                                            @Html.DropDownListFor(x => x.komisyon.ID, Model.ddlkomisyonData, "Lütfen Komisyon Seçiniz", new { @class = "custom-dropdown" })
+                                                        </div>
+
+                                                        <div id="validation-sinif" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.komisyon.ID)
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                                    <div class="main-input-container">
+                                                        <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-school"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.teacher.OkulSicilNo, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.teacher.OkulSicilNo, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-okulno" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.teacher.OkulSicilNo, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <div class="row mt-3 d-flex justify-content-center">
+                                                <div class="col-xl-4 col-lg-5 col-md-6">
+                                                    <div class="main-input-container">
+                                                        <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-school-flag"></i>
+                                                            </div>
+
+
+                                                            @Html.DropDownListFor(x => x.fakulte.ID, Model.ddlfakulteData, "Lütfen Fakülte Seçiniz", new { @class = "custom-dropdown" })
+
+
+                                                        </div>
+
+                                                        <div id="validation-fakulte" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.fakulte.ID, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+                                            <div class="row mt-4 d-flex justify-content-center">
+                                                <div class="col-xl-4 col-lg-5 col-md-6">
+                                                    <div class="main-input-container">
+                                                        <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-school-flag"></i>
+                                                            </div>
+
+
+                                                            @Html.DropDownListFor(x => x.bolum.ID, Model.ddlbolumData, "Lütfen Bölüm Seçiniz", new { @class = "custom-dropdown", secilibolum = ViewBag.secilibolum })
+
+                                                        </div>
+
+                                                        <div id="validation-bolum" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.bolum.ID, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                            <div class="row d-flex justify-content-center mt-3 mb-3">
+                                                <div class="col-3 d-flex justify-content-center">
+                                                    <button type="submit" class="custom-button">Yeni Öğretmen Ekle</button>
+                                                </div>
+
+                                            </div>
+
+
+                                        }
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/urlSidebarDinamikScript.js"></script>
+
+
+    <script>
+
+
+
+        /*Validation Summary Toast Açma*/
+        var toastValSum = document.querySelector("#toast-valSum");
+        var toastValSumBody;
+
+
+
+        if (document.querySelector("#toast-valSum .toast-body").children.length==1) {
+           // toastValSumBody = document.querySelector("#toast-valSum .toast-body li");
+
+                var toast = new bootstrap.Toast(toastValSum, {
+                    animation: true,
+                    autohide: true,
+                    delay: 10000
+                });
+                toast.show();
+
+        }
+
+
+        var toastResult = document.querySelector("#toast-result");
+        var toastResultBody = document.querySelector("#toast-result .toast-body");
+
+
+
+
+        if (toastResultBody.children.length == 1) {
+
+            var toast = new bootstrap.Toast(toastResult, {
+                animation: true,
+                autohide: true,
+                delay: 10000
+            });
+            toast.show();
+        }
+
+
+
+        /*Tooltip Aktifleştirme*/
+        var toolList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = toolList.map(function (x) {
+            return new bootstrap.Tooltip(x, {
+                customClass: 'custom-tooltip',
+
+            });
+
+        });
+
+
+
+
+        /*Navbar profil butonu*/
+        $("#dropdownMenuButton1").click(function () {
+            $(this).toggleClass("active");
+        });
+
+
+        document.addEventListener("click", function (e) {
+
+            if (e.target.id != "dropdownMenuButton1" && e.target.tagName != "I") {
+
+                $("#dropdownMenuButton1").removeClass("active");
+            }
+            e.stopPropagation();
+        });
+
+
+
+
+
+        /*Profil resmi önizleme*/
+
+        var profilResmiInput = document.querySelector("#profilResmiInput");
+
+        var profilResmiImage = document.querySelector("#profilResmiImage");
+
+        profilResmiInput.addEventListener("change", function () {
+            var reader = new FileReader();
+            reader.readAsDataURL(profilResmiInput.files[0]);
+            reader.addEventListener("load", function () {
+                profilResmiImage.setAttribute("src", reader.result);
+            })
+        })
+
+
+
+
+
+
+
+
+        /*Ajax ile birbirine bağlı açılabilir liste oluşturma*/
+
+
+        var ddlFakulte = document.querySelector("#fakulte_ID");
+        var ddlBolum = document.querySelector("#bolum_ID");
+
+        if (ddlBolum.getAttribute("secilibolum") == "") {
+
+            $("#bolum_ID option").not(":first").remove();
+        }
+
+
+        ddlFakulte.addEventListener("change", function (e) {
+            var fakulteId = this.value;
+
+
+
+            if (fakulteId != "") {
+                $("#bolum_ID option").not(":first").remove();
+
+
+                $.ajax({
+                    method: "GET",
+                    url: '@Url.Action("GetBolumByFakulteID","Admin")' + '/' + fakulteId
+                }).done(function (result) {
+
+
+                    for (var i = 0; i < result.length; i++) {
+
+                        var bolumId = result[i].bolumID;
+                        var bolumAdi = result[i].bolumAdi;
+
+                        var opt = document.createElement("option");
+
+                        opt.innerText = bolumAdi;
+
+                        opt.id = bolumId;
+                        opt.value = bolumId;
+
+                        ddlBolum.appendChild(opt);
+
+
+                    }
+
+                    if (result.length == 0) {
+
+
+                    }
+
+                })
+            }
+            else {
+                $("#bolum_ID option").not(":first").remove();
+            }
+        })
+
+
+
+    </script>
+</body>
+</html>

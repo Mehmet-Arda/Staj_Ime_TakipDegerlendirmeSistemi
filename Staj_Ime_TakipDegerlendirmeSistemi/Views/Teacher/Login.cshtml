@@ -1,0 +1,122 @@
+﻿@using Staj_Ime_TakipDegerlendirmeSistemi
+
+@model Kullanicilar
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Öğretmen Giriş</title>
+
+    <link href="~/Content/teacher_style.css" rel="stylesheet" />
+    <link rel="icon" href="~/files/ms-icon-310x310.png" type="image/x-icon">
+</head>
+<body>
+    <div class="teacher-login teacher-login-bg">
+
+        <a id="geriDon" href="@Url.Action("Index","Home")"><i class="fa-solid fa-chevron-left"></i><div>Giriş Sayfasına Dön</div></a>
+
+        <div class="form-container ">
+
+            <div class="form-header">Öğretmen Girişi</div>
+
+
+            @using (Html.BeginForm("Login", "Teacher", FormMethod.Post, new { @class = "" }))
+            {
+                <div id="toast-result" class="toast position-fixed top-0 start-50 translate-middle fs-5 @ViewBag.resultbg text-white border-0 p-2" style="width: 600px; margin-top: 68px;">
+                    <div class="d-flex align-items-center">
+                        <div class="toast-body d-flex align-items-center">
+                            @if (ViewBag.result != null)
+                            {
+                                <span> @ViewBag.result</span>
+
+                            }
+                        </div>
+                        <button class="btn btn-close btn-close-white m-auto me-2" type="button" data-bs-dismiss="toast"></button>
+                    </div>
+
+                </div>
+
+
+                <div class="main-input-container mt-4">
+                    <div class="custom-label">@Html.LabelFor(x => x.Email, new { @class = "" })</div>
+                    <div class="input-container d-flex justify-content-center">
+
+                        <div class="input-icon d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+
+                        @Html.TextBoxFor(x => x.Email, new { @class = "custom-input", autocomplete = "off" })
+                        @*<div class="floating-label">Email</div>*@
+                    </div>
+
+                    <div class="validation-container">
+                        @Html.ValidationMessageFor(x => x.Email, "")
+                    </div>
+
+
+                </div>
+
+
+                <div class="main-input-container mt-4">
+                    <div class="custom-label">@Html.LabelFor(x => x.Sifre, new { @class = "" })</div>
+                    <div class="input-container d-flex justify-content-center">
+
+                        <div class="input-icon d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+
+                        @Html.PasswordFor(x => x.Sifre, new { @class = "custom-input", autocomplete = "off" })
+                    </div>
+
+                    <div class="validation-container">
+                        @Html.ValidationMessageFor(x => x.Sifre, "")
+                    </div>
+                </div>
+
+
+
+                <button type="submit" class="custom-button">Giriş Yap</button>
+
+
+
+            }
+
+
+        </div>
+
+
+
+
+    </div>
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script>
+
+
+        var toastResult = document.querySelector("#toast-result");
+        var toastResultBody = document.querySelector("#toast-result .toast-body");
+
+
+        if (toastResultBody.children.length == 1) {
+
+            var toast = new bootstrap.Toast(toastResult, {
+                animation: true,
+                autohide: true,
+                delay: 6000
+            });
+            toast.show();
+        }
+
+    </script>
+</body>
+</html>

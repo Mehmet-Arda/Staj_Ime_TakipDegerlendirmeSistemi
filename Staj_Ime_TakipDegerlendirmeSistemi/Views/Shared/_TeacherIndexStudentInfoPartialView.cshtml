@@ -1,0 +1,79 @@
+﻿@model Kullanicilar
+
+<div class="modal fade" id="basvuranOgrenci">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="">Öğrenci Bilgileri</h1>
+                <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 text-center mt-3 mb-4">
+                        <div class="student-modal-img-container ">
+                            @if (Model.Fotograf != null)
+                            {
+                                <img src="~/uploads/images/students/@Model.Fotograf" />
+                            }
+                            else
+                            {
+                                <img src="~/files/person.png" />
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row text-center m-2">
+                    <div class="col-12">
+                        <b>TC No:</b>  @Model.TCNo
+                    </div>
+
+                </div>
+
+                <div class="row text-center m-2">
+                    <div class="col-12">
+                        <b>Ad Soyad:</b> @Model.Adi @Model.Soyadi
+                    </div>
+
+                </div>
+
+                <div class="row text-center m-2">
+                    <div class="col-12">
+                        <b> Email:</b> @Model.Email
+                    </div>
+                </div>
+
+                <div class="row text-center m-2">
+                    <div class="col-12">
+                        <b> Okul No:</b> @Model.OkulSicilNo
+                    </div>
+                </div>
+
+                <div class="row text-center m-2">
+                    <div class="col-12">
+                        <b> Fakülte:</b> @Model.Bolumler.Fakulteler.FakulteAdi
+                    </div>
+                </div>
+
+                <div class="row text-center m-2">
+                    <div class="col-12">
+                        <b> Bölüm:</b> @Model.Bolumler.BolumAdi
+                    </div>
+                </div>
+
+
+                <div class="row text-center m-2">
+                    <div class="col-12">
+                        <b> Sınıf:</b> @Model.Siniflar.Sinif
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+
+            </div>
+        </div>
+    </div>
+</div>

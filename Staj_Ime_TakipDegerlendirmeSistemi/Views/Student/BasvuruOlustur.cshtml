@@ -1,0 +1,175 @@
+﻿@using Staj_Ime_TakipDegerlendirmeSistemi.Models
+
+@model StudentBasvuruOlusturViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Başvuru Oluştur</title>
+    <link href="~/Content/student_style.css" rel="stylesheet" />
+    <link rel="icon" href="~/files/ms-icon-310x310.png" type="image/x-icon">
+
+</head>
+<body class="student-index">
+    <div class="wrapper">
+
+        <div class="container">
+
+            @Html.Partial("_StudentHeaderPartialView", Model.ogrenci)
+
+            <div id="toast-result" class="toast position-fixed start-50 translate-middle fs-5 @ViewBag.resultbg text-white border-0 p-2" style="width: 600px; z-index:1111; margin-top: 68px;">
+                <div class="d-flex align-items-center">
+                    <div class="toast-body d-flex align-items-center">
+                        @if (ViewBag.result != null)
+                        {
+                            <span> @ViewBag.result</span>
+
+                        }
+                    </div>
+                    <button class="btn btn-close btn-close-white m-auto me-2" type="button" data-bs-dismiss="toast"></button>
+                </div>
+
+            </div>
+
+            @using (Html.BeginForm("BasvuruOlustur", "Student", FormMethod.Post, new { @class = "basvuru-olustur-form", enctype="multipart/form-data"}))
+            {
+                <div class="row mt-3 mb-5 fs-5">
+                    <b class="text-center fs-3">Başvuru Oluştur</b>
+                </div>
+
+                @Html.HiddenFor(x => x.ogrenci.ID)
+
+
+                <div class="row mt-5 d-flex justify-content-center">
+
+                    <div class="col-8">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.firmaAdi, new { @class = "form-control bg-dark text-white", autocomplete = "off", placeholder = "Firma Adı" })
+                            @Html.LabelFor(x => x.firmaAdi, new { @class = "text-white" })
+                        </div>
+                    </div>
+                    <div class="validation-container text-center mt-2">
+                        @Html.ValidationMessageFor(x => x.firmaAdi, "")
+                    </div>
+
+
+                </div>
+
+                <div class="row mt-5 d-flex justify-content-center">
+
+                    <div class="col-11 text-center">
+                        <b class="fs-5">Staj Başvuru ve Kabul Formunu Yükle</b>
+                    </div>
+
+
+                </div>
+
+
+                <div class="row mt-3 d-flex justify-content-center">
+
+                    <div class="col-8 text-center d-flex justify-content-center ps-5">
+                        @Html.TextBoxFor(x => x.basvuruPdf, new { type = "file", accept = "application/pdf" })
+                        @*<input type="file" id="basvuruPdf" name=@Model.basvuruPdf value=@Model.basvuruPdf accept="application/pdf" />*@
+                        @*<label class="custom-pdf-label mx-auto" for="basvuruPdf"><i class="fa-solid fa-file-pdf"></i></label>*@
+
+                    </div>
+
+                    <div class="validation-container text-center mt-2">
+                        @Html.ValidationMessageFor(x => x.basvuruPdf, "")
+                    </div>
+
+                </div>
+
+
+
+                <div class="row mt-5 d-flex justify-content-center">
+
+                    <div class="col-8 text-center">
+                        @Html.DropDownListFor(x => x.basvuruTuru.ID, (SelectList)Model.ddlbasvuruTuru, "Lütfen Başvuru Türü Seçiniz", new { @class = "custom-dropdown" })
+
+                    </div>
+
+                    <div class="validation-container text-center mt-2">
+                        @Html.ValidationMessageFor(x => x.basvuruTuru.ID, "")
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="row mt-5 d-flex justify-content-center">
+
+                    <div class="col-8 text-center">
+                        @Html.DropDownListFor(x => x.basvuruDonem.ID, (SelectList)Model.ddlbasvuruDonem, "Lütfen Başvuru Dönemi Seçiniz", new { @class = "custom-dropdown" })
+
+                    </div>
+                    <div class="validation-container text-center mt-2">
+                        @Html.ValidationMessageFor(x => x.basvuruDonem.ID, "")
+                    </div>
+
+                </div>
+
+
+                <div class="row mt-5 mb-5 d-flex justify-content-center">
+
+                    <div class="col-8 text-center">
+                        <button type="submit" class="custom-basvuru-button"><i class="fa-solid fa-paper-plane me-2"></i>Gönder</button>
+                    </div>
+
+                </div>
+
+
+
+            }
+
+
+
+
+
+        </div>
+
+
+        @Html.Partial("_StudentFooterPartialView")
+
+
+
+    </div>
+
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+
+        var toastResult = document.querySelector("#toast-result");
+        var toastResultBody = document.querySelector("#toast-result .toast-body");
+
+
+        if (toastResultBody.children.length == 1) {
+
+            var toast = new bootstrap.Toast(toastResult, {
+                animation: true,
+                autohide: true,
+                delay: 6000
+            });
+            toast.show();
+        }
+
+
+
+    </script>
+</body>
+</html>
+

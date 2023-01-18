@@ -1,0 +1,77 @@
+﻿@using Staj_Ime_TakipDegerlendirmeSistemi.Models
+@model UsersViewModel
+
+
+<div class="card card-table">
+    <div class="card-header card-header-danger" style="background: #1D4ED8;">
+        <h4 class="card-title">
+            Tüm Kayıtlı Öğretmenler
+        </h4>
+        <p class="card-category">
+            Sistemdeki öğretmenlerin kaydı güncellenebilir ve silinebilir.
+        </p>
+    </div>
+
+
+    <div class="card-body table-responsive" style="height:450px;">
+        <table class="table table-hover">
+            <thead class="text-warning">
+                <tr>
+                    <th scope="col"><b>#</b></th>
+                    <th>Fotoğraf</th>
+                    <th>TC No</th>
+                    <th>Adı</th>
+                    <th>Soyadı</th>
+                    <th>Email</th>
+                    <th>Şifre</th>
+                    <th>Telefon</th>
+                  
+                    <th>Sicil No</th>
+                    <th>Komisyon</th>
+                    <th>Bölüm</th>
+                    <th>Kayıt Tarihi</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    int sayac = Model.numeration;
+                    foreach (var item in Model.users)
+                    {
+
+                        <tr>
+                            <td scope="col"><b>@sayac</b></td>
+                            <td><img src=@(item.Fotograf == null ? "/files/person.png" : "/uploads/images/teachers/" + item.Fotograf) /></td>
+                            <td>@item.TCNo</td>
+                            <td>@item.Adi</td>
+                            <td>@item.Soyadi</td>
+                            <td>@item.Email</td>
+                            <td><b data-bs-toggle="tooltip" data-bs-placement="top" title="@item.Sifre">****</b></td>
+                            <td>@item.Telefon</td>
+                           
+                            <td>@item.OkulSicilNo</td>
+                            @if (item.KomisyonOgretmen.FirstOrDefault() != null)
+                            {
+                                <td>@item.KomisyonOgretmen.FirstOrDefault().Komisyonlar.KomisyonAdi</td>
+                            }
+                            else
+                            {
+                                <td>Atanmadı</td>
+                            }
+                            <td>@item.Bolumler.BolumAdi</td>
+                            <td>@item.KayitTarihi</td>
+                            <td><a class="update-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Güncelle" href="@Url.Action("TeacherUpdate", new { id = item.ID })"><i class="fa-solid fa-pen"></i></a></td>
+                            <td><a class="delete-link" student-id="@item.ID" data-bs-toggle="tooltip" data-bs-placement="top" title="Sil" href=""><i class="fa-solid fa-user-slash"></i></a></td>
+                        </tr>
+                        sayac++;
+                    }
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

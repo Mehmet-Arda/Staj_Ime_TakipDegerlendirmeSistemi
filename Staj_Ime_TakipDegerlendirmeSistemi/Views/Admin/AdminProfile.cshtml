@@ -1,0 +1,422 @@
+﻿
+@using Staj_Ime_TakipDegerlendirmeSistemi.Models
+
+@model AdminProfileViewModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Yönetici Profili</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link rel="icon" href="~/files/ms-icon-310x310.png" type="image/x-icon">
+</head>
+<body>
+    <div class="wrapper">
+
+        @Html.Partial("_AdminSidebarPartialView")
+
+
+        <div class="main-panel">
+
+            @Html.Partial("_AdminNavbarPartialView", "Yönetici Profili")
+
+
+            <div class="profile content">
+                <div class="container-fluid ">
+
+                    <div class="row mt-5">
+
+                        <div class="col-4 m-auto">
+                            <div class="card card-admin-profile">
+
+                                <div class="card-avatar">
+                                    <div class="image-input-container">
+                                        <img class="" src=@(Model.admin.Fotograf == null ? "/files/person.png" : "/uploads/images/administrator/" + Model.admin.Fotograf) title="Profil Resmi Önizlemesi" id="profilResmiImage" />
+
+                                        <input type="file" form="adminProfileForm" name="profilResmi" id="profilResmiInput" accept="image/*" />
+                                        <label for="profilResmiInput" class="bg-danger">
+                                            <i class="fa-solid fa-camera"></i>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <h6 class="card-category">@Model.admin.Roller.RolAdi</h6>
+                                    <h4 class="card-title">@Model.admin.Adi @Model.admin.Soyadi</h4>
+                                    <p class="card-description">
+                                        Süper yönetici akla gelebilecek her şeyi yapması gerekiyordu. Ama geliştirme zamanı yetmiyordu. Yönetici anlayışlı biriydi neyseki..
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 mt-5">
+                            <div class="card card-profile-input-container">
+                                <div class="card-header card-header-danger">
+                                    <h4 class="card-title">
+                                        Profilini Güncelle
+                                    </h4>
+                                    <p class="card-category">
+                                        Eksik kısımları tamamla veya varolanı güncelle.
+                                    </p>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="admin-profile form-container ">
+
+                                        @using (Html.BeginForm("AdminProfile", "Admin", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "adminProfileForm" }))
+                                        {
+
+                                            <div id="toast-valSum" class="toast position-fixed top-0 start-50 translate-middle fs-5 bg-danger text-white border-0" style="width:600px; margin-top:68px;">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="toast-body d-flex align-items-center">
+                                                        @if (ViewBag.error != null)
+                                                        {
+                                                            <span> @ViewBag.error</span>
+
+                                                        }
+
+                                                    </div>
+                                                    <button class="btn btn-close btn-close-white m-auto me-2" type="button" data-bs-dismiss="toast"></button>
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <div id="toast-result" class="toast position-fixed top-0 start-50 translate-middle fs-5 bg-success text-white border-0 p-2" style="width: 600px; margin-top: 68px;">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="toast-body d-flex align-items-center">
+                                                        @if (ViewBag.result != null)
+                                                        {
+                                                            <span> @ViewBag.result</span>
+
+                                                        }
+                                                    </div>
+                                                    <button class="btn btn-close btn-close-white m-auto me-2" type="button" data-bs-dismiss="toast"></button>
+                                                </div>
+
+                                            </div>
+
+
+
+
+                                            <div class="row d-flex align-items-center m-3 ps-5 ">
+                                                <div class="col-3 position-relative ms-5"> <i class="fa-solid fa-star-of-life zorunlu-alan-icon me-5"></i> &nbsp;&nbsp;&nbsp; Girilmesi Zorunlu Alandır.</div>
+
+                                            </div>
+
+                                            @Html.Hidden("id", Model.admin.ID)
+
+                                            <div class="row d-flex justify-content-center mt-5">
+
+
+
+
+
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                                    <div class="profile-main-input-container">
+                                                        <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.admin.Adi, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.admin.Adi, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-ad" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.admin.Adi, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                                    <div class="profile-main-input-container">
+                                                        <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.admin.Soyadi, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.admin.Soyadi, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-ad" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.admin.Soyadi, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+                                            <div class="row d-flex justify-content-center mt-5">
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                                    <div class="profile-main-input-container">
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-id-card"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.admin.TCNo, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.admin.TCNo, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-ad" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.admin.TCNo, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                                    <div class="profile-main-input-container">
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+                                                            <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.admin.OkulSicilNo, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.admin.OkulSicilNo, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-ad" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.admin.OkulSicilNo, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+                                            </div>
+
+
+
+
+                                            <div class="row d-flex justify-content-center mt-5">
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                                    <div class="profile-main-input-container">
+                                                        <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.admin.Email, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.admin.Email, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-ad" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.admin.Email, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                                    <div class="profile-main-input-container">
+                                                       
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.sifre, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.sifre, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-ad" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.sifre, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                                    <div class="profile-main-input-container">
+                                                        <div class="form-floating input-container d-flex justify-content-center">
+
+                                                            <div class="input-icon d-flex justify-content-center align-items-center">
+                                                                <i class="fa-solid fa-user"></i>
+                                                            </div>
+
+                                                            @Html.TextBoxFor(x => x.admin.Telefon, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                            @Html.LabelFor(x => x.admin.Telefon, new { @class = "custom-label ms-3" })
+                                                        </div>
+
+                                                        <div id="validation-ad" class="validation-container">
+                                                            @Html.ValidationMessageFor(x => x.admin.Telefon, "")
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+
+
+
+                                            <div class="row d-flex justify-content-center mt-3 mb-3">
+                                                <div class="col-3 d-flex justify-content-center">
+                                                    <button type="submit" class="custom-button">Güncelle</button>
+                                                </div>
+
+                                            </div>
+
+
+                                        }
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/urlSidebarDinamikScript.js"></script>
+
+
+    <script>
+        var sideBarLink = document.querySelectorAll(".sidebar-wrapper .nav .nav-item");
+
+
+        /*Validation Summary Toast Açma*/
+        var toastValSum = document.querySelector("#toast-valSum");
+        var toastValSumBody;
+
+
+
+        if (document.querySelector("#toast-valSum .toast-body").children.length == 1) {
+            // toastValSumBody = document.querySelector("#toast-valSum .toast-body li");
+
+            var toast = new bootstrap.Toast(toastValSum, {
+                animation: true,
+                autohide: true,
+                delay: 10000
+            });
+            toast.show();
+
+        }
+
+
+        var toastResult = document.querySelector("#toast-result");
+        var toastResultBody = document.querySelector("#toast-result .toast-body");
+
+
+
+
+        if (toastResultBody.children.length == 1) {
+
+            var toast = new bootstrap.Toast(toastResult, {
+                animation: true,
+                autohide: true,
+                delay: 10000
+            });
+            toast.show();
+        }
+
+
+
+
+
+        /*Navbar profil butonu*/
+        $("#dropdownMenuButton1").click(function () {
+            $(this).toggleClass("active");
+        });
+
+
+        document.addEventListener("click", function (e) {
+
+            if (e.target.id != "dropdownMenuButton1" && e.target.tagName != "I") {
+
+                $("#dropdownMenuButton1").removeClass("active");
+            }
+            e.stopPropagation();
+        });
+
+
+
+
+
+
+        /*Profil resmi önizleme*/
+
+        var profilResmiInput = document.querySelector("#profilResmiInput");
+
+        var profilResmiImage = document.querySelector("#profilResmiImage");
+
+        profilResmiInput.addEventListener("change", function () {
+            var reader = new FileReader();
+            reader.readAsDataURL(profilResmiInput.files[0]);
+            reader.addEventListener("load", function () {
+                profilResmiImage.setAttribute("src", reader.result);
+            })
+        })
+
+
+
+
+
+    </script>
+</body>
+</html>

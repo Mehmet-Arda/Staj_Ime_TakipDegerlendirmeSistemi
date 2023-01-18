@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="67e10c6a6f294a6b8d1914cf4c12be5a" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.BasvuruDurum" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Basvurular" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.BasvuruTuru" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Belgeler" Width="1.5" PointX="9.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.BelgeTurleri" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Bolumler" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Fakulteler" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Komisyonlar" Width="1.5" PointX="8.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.KomisyonOgretmen" Width="1.5" PointX="10.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Kullanicilar" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Roller" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Siniflar" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Basvurular_BasvuruDurum" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Basvurular_BasvuruTuru" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Basvurular_Kullanicilar" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Basvurular_Kullanicilar1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Belgeler_Basvurular" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Belgeler_BelgeTurleri" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Bolumler_Fakulteler" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Kullanicilar_Bolumler" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_KomisyonOgretmen_Komisyonlar" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_KomisyonOgretmen_Kullanicilar" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Kullanicilar_Roller" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Kullanicilar_Siniflar" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

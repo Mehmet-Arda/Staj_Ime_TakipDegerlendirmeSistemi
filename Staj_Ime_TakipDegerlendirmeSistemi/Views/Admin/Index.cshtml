@@ -1,0 +1,304 @@
+﻿@model Staj_Ime_TakipDegerlendirmeSistemi.Models.AdminIndexViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Yönetici Anasayfa</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link rel="icon" href="~/files/ms-icon-310x310.png" type="image/x-icon">
+
+</head>
+<body>
+    <div class="wrapper">
+
+        @Html.Partial("_AdminSidebarPartialView")
+
+
+        <div class="main-panel">
+
+           @Html.Partial("_AdminNavbarPartialView","Anasayfa")
+
+
+
+            <div class="content">
+                <div class="container-fluid">
+
+                    <div class="row mt-4 d-flex justify-content-center">
+                        <b class="bold fs-4 text-center">Kullanıcı İstatistikleri</b>
+                    </div>
+
+                    <div class="row mt-2 d-flex justify-content-center">
+
+                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-blue card-header-icon">
+                                    <div class="card-icon">
+                                        <i class="fa-solid fa-users"></i>
+
+                                    </div>
+                                    <p class="card-category ms-auto text-center">Kayıtlı Kullanıcılar</p>
+                                    <h3 class="card-title">
+                                        @Model.toplamKullanıcıSayısı
+                                        <small>Adet</small>
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                        <a href="javascript:;">Detaylı bilgi için</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-success card-header-icon">
+                                    <div class="card-icon">
+                                        <i class="fa-solid fa-person-chalkboard"></i>
+
+                                    </div>
+                                    <p class="card-category ms-auto text-center">Kayıtlı Öğretmen</p>
+                                    <h3 class="card-title">
+                                        @Model.toplamOgretmenAdet
+                                        <small>Adet</small>
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                        <a href="javascript:;">Detaylı bilgi için</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-success card-header-icon">
+                                    <div class="card-icon">
+                                        <i class="fa-solid fa-user-graduate"></i>
+                                    </div>
+                                    <p class="card-category ms-auto text-center">Kayıtlı Öğrenci</p>
+                                    <h3 class="card-title">
+                                        @Model.toplamOgrenciAdet
+                                        <small>Adet</small>
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                        <a href="javascript:;">Detaylı bilgi için</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-success card-header-icon">
+                                    <div class="card-icon">
+                                        <i class="fa-solid fa-user-shield"></i>
+                                    </div>
+                                    <p class="card-category ms-auto text-center">Kayıtlı Yönetici</p>
+                                    <h3 class="card-title">
+                                        @Model.toplamYoneticiAdet
+                                        <small>Adet</small>
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                        <a href="javascript:;">Detaylı bilgi için</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <div class="row mt-5 d-flex justify-content-center">
+
+                        <b class="bold fs-4 text-center">Başvuru İstatistikleri</b>
+
+                    </div>
+
+
+
+
+
+                    <div class="row mt-2 d-flex justify-content-center">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-blue card-header-icon">
+                                    <div class="card-icon">
+                                        <i class="fa-regular fa-paper-plane"></i>
+
+                                    </div>
+                                    <p class="card-category ms-auto text-center">Toplam Başvuru</p>
+                                    <h3 class="card-title">
+                                        @Model.toplamBasvuruAdet
+                                        <small>Adet</small>
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                        <a href="javascript:;">Detaylı bilgi için</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-success card-header-icon">
+                                    <div class="card-icon">
+                                        <i class="fa-solid fa-hourglass-end"></i>
+
+                                    </div>
+                                    <p class="card-category ms-auto text-center">Tamamlanmış Başvurular</p>
+                                    <h3 class="card-title">
+                                        @Model.tamamlanmisBasvuruAdet
+                                        <small>Adet</small>
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                        <a href="javascript:;">Detaylı bilgi için</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-warning card-header-icon">
+                                    <div class="card-icon">
+                                        <i class="fa-solid fa-hourglass-half"></i>
+                                    </div>
+                                    <p class="card-category ms-auto text-center">Devam Eden Başvurular</p>
+                                    <h3 class="card-title">
+                                        @Model.devamEdenBasvuruAdet
+                                        <small>Adet</small>
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                        <a href="javascript:;">Detaylı bilgi için</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header card-header-danger card-header-icon">
+                                    <div class="card-icon">
+                                        <i class="fa-solid fa-user-xmark"></i>
+                                    </div>
+                                    <p class="card-category ms-auto text-center">Reddedilen Başvurular</p>
+                                    <h3 class="card-title">
+                                        @Model.reddedilenBasvuruAdet
+                                        <small>Adet</small>
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                        <a href="javascript:;">Detaylı bilgi için</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                </div>
+
+
+              
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Scripts/urlSidebarDinamikScript.js"></script>
+
+    <script>
+      
+        
+        $("#dropdownMenuButton1").click(function () {
+            $(this).toggleClass("active");
+        });
+
+
+        document.addEventListener("click", function (e) {
+
+            //alert(e.target.tagName);
+            if (e.target.id != "dropdownMenuButton1" && e.target.tagName != "I") {
+
+                $("#dropdownMenuButton1").removeClass("active");
+            }
+            e.stopPropagation();
+        });
+
+
+
+        var uriArray = window.location.href.split("/");
+
+
+        var controllerName = uriArray[uriArray.length - 2];
+        var viewName = uriArray[uriArray.length - 1];
+
+      
+
+    </script>
+</body>
+</html>

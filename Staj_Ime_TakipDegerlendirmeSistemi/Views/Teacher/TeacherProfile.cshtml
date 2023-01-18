@@ -1,0 +1,416 @@
+﻿
+@using Staj_Ime_TakipDegerlendirmeSistemi.Models
+
+@model TeacherProfileViewModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Öğretmen Profili</title>
+
+    <link href="~/Content/teacher_style.css" rel="stylesheet" />
+    <link rel="icon" href="~/files/ms-icon-310x310.png" type="image/x-icon">
+
+</head>
+<body class="teacher-profile">
+    <div class="wrapper">
+
+        <div class="container ">
+            @Html.Partial("_TeacherHeaderPartialView",Model.ogretmen)
+
+            <div class="row mt-5">
+
+                <div class="col-md-6 col-lg-4 col-xl-4 m-auto">
+                    <div class="card card-teacher-profile">
+
+                        <div class="card-avatar">
+                            <div class="image-input-container">
+                                <img class="" src=@(Model.ogretmen.Fotograf == null ? "/files/person.png" : "/uploads/images/teachers/" + Model.ogretmen.Fotograf) title="Profil Resmi Önizlemesi" id="profilResmiImage" />
+
+                                <input type="file" form="teacherProfileForm" name="profilResmi" id="profilResmiInput" accept="image/*" />
+                                <label for="profilResmiInput" class="bg-danger">
+                                    <i class="fa-solid fa-camera"></i>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <h6 class="card-category">@Model.ogretmen.Roller.RolAdi</h6>
+                            <h4 class="card-title">@Model.ogretmen.Adi @Model.ogretmen.Soyadi</h4>
+                            <p class="card-description">
+                                Öğretmen Profil Sayfası
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+
+                <div class="col-12 mt-3  mx-auto">
+                    <div class="card card-profile-input-container">
+                        <div class="card-header card-header-danger">
+                            <h4 class="card-title">
+                                Profilini Güncelle
+                            </h4>
+                            <p class="card-category">
+                                Eksik kısımları tamamla veya varolanı güncelle.
+                            </p>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="teacher-profile form-container ">
+
+                                @using (Html.BeginForm("TeacherProfile", "Teacher", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "teacherProfileForm" }))
+                                {
+
+                                    @Html.HiddenFor(x => x.ogretmen.ID)
+
+                                    <div id="toast-result" class="toast position-fixed top-0 start-50 translate-middle fs-5 @ViewBag.resultbg  text-white border-0 p-2" style="width: 600px; margin-top: 68px; z-index: 1111;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="toast-body d-flex align-items-center">
+                                                @if (ViewBag.result != null)
+                                                {
+                                                    <span> @ViewBag.result</span>
+
+                                                }
+                                            </div>
+                                            <button class="btn btn-close btn-close-white m-auto me-2" type="button" data-bs-dismiss="toast"></button>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <div class="row d-flex align-items-center m-3 ps-5 ">
+                                        <div class="col-3 position-relative ms-5"> <i class="fa-solid fa-star-of-life zorunlu-alan-icon me-5"></i> &nbsp;&nbsp;&nbsp; Girilmesi Zorunlu Alandır.</div>
+
+                                    </div>
+
+
+
+                                    <div class="row d-flex justify-content-center mt-5">
+
+
+
+                                        <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                            <div class="profile-main-input-container">
+                                                <div class="form-floating input-container d-flex justify-content-center">
+
+                                                    <div class="input-icon disabled d-flex justify-content-center align-items-center">
+                                                        <i class="fa-solid fa-user"></i>
+                                                    </div>
+
+                                                    @Html.TextBoxFor(x => x.ogretmen.Adi, new { @class = "custom-input form-control disabled", placeholder = " ", disabled = true, autocomplete = "off" })
+                                                    @Html.LabelFor(x => x.ogretmen.Adi, new { @class = "custom-label ms-3" })
+                                                </div>
+
+                                                <div id="validation-ad" class="validation-container">
+                                                    @Html.ValidationMessageFor(x => x.ogretmen.Adi, "")
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                            <div class="profile-main-input-container">
+                                                <div class="form-floating input-container d-flex justify-content-center">
+
+                                                    <div class="input-icon disabled d-flex justify-content-center align-items-center">
+                                                        <i class="fa-solid fa-user"></i>
+                                                    </div>
+
+                                                    @Html.TextBoxFor(x => x.ogretmen.Soyadi, new { @class = "custom-input form-control disabled", placeholder = " ", disabled = true, autocomplete = "off" })
+                                                    @Html.LabelFor(x => x.ogretmen.Soyadi, new { @class = "custom-label ms-3" })
+                                                </div>
+
+                                                <div id="validation-ad" class="validation-container">
+                                                    @Html.ValidationMessageFor(x => x.ogretmen.Soyadi, "")
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="row d-flex justify-content-center mt-5">
+
+                                        <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                            <div class="profile-main-input-container">
+                                                <div class="form-floating input-container d-flex justify-content-center">
+
+                                                    <div class="input-icon disabled d-flex justify-content-center align-items-center">
+                                                        <i class="fa-solid fa-user"></i>
+                                                    </div>
+
+                                                    @Html.TextBoxFor(x => x.ogretmen.TCNo, new { @class = "custom-input form-control disabled", placeholder = " ", disabled = true, autocomplete = "off" })
+                                                    @Html.LabelFor(x => x.ogretmen.TCNo, new { @class = "custom-label ms-3" })
+                                                </div>
+
+                                                <div id="validation-ad" class="validation-container">
+                                                    @Html.ValidationMessageFor(x => x.ogretmen.TCNo, "")
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                            <div class="profile-main-input-container">
+                                                <div class="form-floating input-container d-flex justify-content-center">
+
+                                                    <div class="input-icon disabled d-flex justify-content-center align-items-center">
+                                                        <i class="fa-solid fa-user"></i>
+                                                    </div>
+
+                                                    @Html.TextBoxFor(x => x.ogretmen.OkulSicilNo, new { @class = "custom-input form-control disabled", placeholder = " ", disabled = true, autocomplete = "off" })
+                                                    @Html.LabelFor(x => x.ogretmen.OkulSicilNo, new { @class = "custom-label ms-3" })
+                                                </div>
+
+                                                <div id="validation-ad" class="validation-container">
+                                                    @Html.ValidationMessageFor(x => x.ogretmen.OkulSicilNo, "")
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                    </div>
+
+
+
+
+                                    <div class="row d-flex justify-content-center mt-5">
+
+                                        <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                            <div class="profile-main-input-container">
+                                                <i class="fa-solid fa-star-of-life zorunlu-alan-icon"></i>
+                                                <div class="form-floating input-container d-flex justify-content-center">
+
+                                                    <div class="input-icon d-flex justify-content-center align-items-center">
+                                                        <i class="fa-solid fa-user"></i>
+                                                    </div>
+
+                                                    @Html.TextBoxFor(x => x.ogretmen.Email, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                    @Html.LabelFor(x => x.ogretmen.Email, new { @class = "custom-label ms-3" })
+                                                </div>
+
+                                                <div id="validation-ad" class="validation-container">
+                                                    @Html.ValidationMessageFor(x => x.ogretmen.Email, "")
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                            <div class="profile-main-input-container">
+                                                
+                                                <div class="form-floating input-container d-flex justify-content-center">
+
+                                                    <div class="input-icon d-flex justify-content-center align-items-center">
+                                                        <i class="fa-solid fa-user"></i>
+                                                    </div>
+
+                                                    @Html.TextBoxFor(x => x.sifre, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                    @Html.LabelFor(x => x.sifre, new { @class = "custom-label ms-3" })
+                                                </div>
+
+                                                <div id="validation-ad" class="validation-container">
+                                                    @Html.ValidationMessageFor(x => x.sifre, "")
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                            <div class="profile-main-input-container">
+                                                <div class="form-floating input-container d-flex justify-content-center">
+
+                                                    <div class="input-icon d-flex justify-content-center align-items-center">
+                                                        <i class="fa-solid fa-user"></i>
+                                                    </div>
+
+                                                    @Html.TextBoxFor(x => x.ogretmen.Telefon, new { @class = "custom-input form-control", placeholder = " ", autocomplete = "off" })
+                                                    @Html.LabelFor(x => x.ogretmen.Telefon, new { @class = "custom-label ms-3" })
+                                                </div>
+
+                                                <div id="validation-ad" class="validation-container">
+                                                    @Html.ValidationMessageFor(x => x.ogretmen.Telefon, "")
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+                                    <div class="row d-flex justify-content-center mt-5">
+
+                                        <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                            <div class="profile-main-input-container">
+                                                <div class="form-floating input-container d-flex justify-content-center">
+
+                                                    <div class="input-icon disabled d-flex justify-content-center align-items-center">
+                                                        <i class="fa-solid fa-user"></i>
+                                                    </div>
+
+                                                    @Html.TextBoxFor(x => x.ogretmen.Bolumler.Fakulteler.FakulteAdi, new { @class = "custom-input form-control disabled", disabled = true, placeholder = " ", autocomplete = "off" })
+                                                    @Html.LabelFor(x => x.ogretmen.Bolumler.Fakulte, new { @class = "custom-label ms-3" })
+                                                </div>
+
+                                                <div id="validation-ad" class="validation-container">
+                                                    @Html.ValidationMessageFor(x => x.ogretmen.Bolumler.Fakulte, "")
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                            <div class="profile-main-input-container">
+                                                <div class="form-floating input-container d-flex justify-content-center">
+
+                                                    <div class="input-icon disabled d-flex justify-content-center align-items-center">
+                                                        <i class="fa-solid fa-user"></i>
+                                                    </div>
+
+                                                    @Html.TextBoxFor(x => x.ogretmen.Bolumler.BolumAdi, new { @class = "custom-input form-control disabled", placeholder = " ", disabled = true, autocomplete = "off" })
+                                                    @Html.LabelFor(x => x.ogretmen.Bolum, new { @class = "custom-label ms-3" })
+                                                </div>
+
+                                                <div id="validation-ad" class="validation-container">
+                                                    @Html.ValidationMessageFor(x => x.ogretmen.Bolum, "")
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-xl-3 col-lg-4 col-md-6 ">
+                                            <div class="profile-main-input-container">
+                                                <div class="form-floating input-container d-flex justify-content-center">
+
+                                                    <div class="input-icon disabled d-flex justify-content-center align-items-center">
+                                                        <i class="fa-solid fa-user"></i>
+                                                    </div>
+
+                                                    @Html.TextBoxFor(x => x.ogretmen.KomisyonOgretmen.FirstOrDefault().Komisyonlar.KomisyonAdi, new { @class = "custom-input form-control disabled", placeholder = " ", disabled = true, autocomplete = "off" })
+                                                    @Html.LabelFor(x => x.ogretmen.KomisyonOgretmen.FirstOrDefault().Komisyonlar.KomisyonAdi, new { @class = "custom-label ms-3" })
+                                                </div>
+
+                                                <div id="validation-ad" class="validation-container">
+                                                    @Html.ValidationMessageFor(x => x.ogretmen.KomisyonOgretmen.FirstOrDefault().Komisyonlar.KomisyonAdi, "")
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+
+                                    <div class="row d-flex justify-content-center mt-3 mb-3">
+                                        <div class="col-3 d-flex justify-content-center">
+                                            <button type="submit" class="custom-button">Güncelle</button>
+                                        </div>
+
+                                    </div>
+
+
+                                }
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        @Html.Partial("_StudentFooterPartialView")
+
+    </div>
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+
+    <script>
+
+        /*Toast yapısını açma*/
+
+        var toastResult = document.querySelector("#toast-result");
+        var toastResultBody = document.querySelector("#toast-result .toast-body");
+
+
+        if (toastResultBody.children.length == 1) {
+
+            var toast = new bootstrap.Toast(toastResult, {
+                animation: true,
+                autohide: true,
+                delay: 6000
+            });
+            toast.show();
+        }
+
+
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+
+
+
+        /*Profil resmi önizleme*/
+
+        var profilResmiInput = document.querySelector("#profilResmiInput");
+
+        var profilResmiImage = document.querySelector("#profilResmiImage");
+
+        profilResmiInput.addEventListener("change", function () {
+            var reader = new FileReader();
+            reader.readAsDataURL(profilResmiInput.files[0]);
+            reader.addEventListener("load", function () {
+                profilResmiImage.setAttribute("src", reader.result);
+            })
+        })
+
+
+
+
+
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,430 @@
+﻿@using System.Web.Helpers
+@using Staj_Ime_TakipDegerlendirmeSistemi.Models
+@model UsersViewModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Öğrenci İşlemleri</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link rel="icon" href="~/files/ms-icon-310x310.png" type="image/x-icon">
+
+</head>
+<body>
+    <div class="wrapper">
+
+        @Html.Partial("_AdminSidebarPartialView")
+
+
+        <div class="main-panel">
+
+            @Html.Partial("_AdminNavbarPartialView","Öğrenci İşlemleri")
+
+
+
+            <div class="content">
+                <div class="container-fluid">
+
+
+                    <div id="toast-result" class="toast position-fixed top-0 start-50 translate-middle fs-5 bg-success text-white border-0 p-2" style="width: 600px; margin-top: 68px;">
+                        <div class="d-flex align-items-center">
+                            <div class="toast-body d-flex align-items-center">
+                                @if (ViewBag.result != null)
+                                {
+                                    <span> @ViewBag.result</span>
+
+                                }
+                            </div>
+                            <button class="btn btn-close btn-close-white m-auto me-2" type="button" data-bs-dismiss="toast"></button>
+                        </div>
+
+                    </div>
+
+
+
+                    <div id="delete-modal" class="modal fade " data-bs-keyboard=false tabindex="-1">
+                        <div class="modal-dialog ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Öğrenci Silme</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Öğrenci kaydını silmek istediğinize emin misiniz?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Geri</button>
+                                    <button id="delete-modal-button" type="button" data-bs-dismiss="modal" class="btn btn-danger">Sil</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row mt-2">
+                        <div class="col-12 text-end">
+                            <a class="student-add-button me-5" href="/Admin/StudentAdd">Yeni Öğrenci Ekle</a>
+                        </div>
+                    </div>
+
+
+                    <div class="row ">
+                        <div class="col-12 ps-5">
+                            <i class="fa-solid fa-magnifying-glass"></i> <input id="student-search" placeholder="Aramak için değer girin" type="text" name="studentSearch" value="" />
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-5">
+                        <div id="students-table-container" class="col-12">
+                            @Html.Partial("_StudentsTablePartialView", Model)
+
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-3 ">
+                        <div id="students-pagination-container" class="col-3 ms-auto">
+                            @Html.Partial("_StudentsPaginationPartialView", Model)
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/urlSidebarDinamikScript.js"></script>
+
+
+    <script>
+
+
+        var toastResult = document.querySelector("#toast-result");
+        var toastResultBody = document.querySelector("#toast-result .toast-body");
+
+
+        if (toastResultBody.children.length == 1) {
+
+            var toast = new bootstrap.Toast(toastResult, {
+                animation: true,
+                autohide: true,
+                delay: 10000
+            });
+            toast.show();
+        }
+
+
+
+        $("#dropdownMenuButton1").click(function () {
+            $(this).toggleClass("active");
+        });
+
+
+        var toolList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = toolList.map(function (x) {
+            return new bootstrap.Tooltip(x, {
+                customClass: 'custom-tooltip',
+
+            });
+
+        });
+
+
+
+        document.addEventListener("click", function (e) {
+
+            if (e.target.id != "dropdownMenuButton1" && e.target.tagName != "I") {
+
+                $("#dropdownMenuButton1").removeClass("active");
+            }
+            e.stopPropagation();
+        });
+
+
+
+        var deleteLinkButton = document.querySelectorAll('.delete-link');
+        var deleteModal = document.querySelector("#delete-modal");
+
+        for (var i = 0; i < deleteLinkButton.length; i++) {
+            deleteLinkButton[i].addEventListener("click", function (e) {
+                e.preventDefault();
+
+
+                var studentId = this.getAttribute("student-id");
+
+                var studentDeleteModal = new bootstrap.Modal(document.querySelector("#delete-modal"));
+                studentDeleteModal.show();
+                deleteModal.setAttribute("student-id", studentId);
+
+
+            });
+        }
+
+        var deleteModalButton = document.querySelector("#delete-modal-button");
+        deleteModalButton.addEventListener("click", function () {
+            var pageNumber = document.querySelector("#students-pagination-container .page-item.active .page-link");
+
+            $.ajax({
+                method: "POST",
+                data: { page: pageNumber.getAttribute("page"), id: deleteModal.getAttribute("student-id") },
+                url: "/Admin/UserDelete/"
+
+            }).done(function (result) {
+                paginationAjax();
+                document.querySelector("#students-table-container").innerHTML = result;
+
+
+                $.ajax({
+                    method: "POST",
+                    data: { page: pageNumber.getAttribute("page"), rol: 5 },
+                    url: "/Admin/GetPaginationByPage/"
+                }).done(function (result) {
+
+                    var studentPaginationContainer = document.querySelector("#students-pagination-container");
+
+                    studentPaginationContainer.innerHTML = result;
+
+                    document.querySelector("#student-search").value = "";
+
+                    paginationAjax();
+
+                });
+
+
+
+
+                var toolList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                var tooltipList = toolList.map(function (x) {
+                    return new bootstrap.Tooltip(x, {
+                        customClass: 'custom-tooltip',
+
+                    });
+
+                });
+
+
+
+                var deleteLinkButton = document.querySelectorAll('.delete-link');
+                var deleteModal = document.querySelector("#delete-modal");
+
+                for (var i = 0; i < deleteLinkButton.length; i++) {
+                    deleteLinkButton[i].addEventListener("click", function (e) {
+                        e.preventDefault();
+
+
+                        var studentId = this.getAttribute("student-id");
+
+                        var studentDeleteModal = new bootstrap.Modal(document.querySelector("#delete-modal"));
+                        studentDeleteModal.show();
+                        deleteModal.setAttribute("student-id", studentId);
+
+
+                    });
+                }
+
+
+
+
+                var studentsList = document.querySelector(".card.card-table tbody");
+
+                if (studentsList.children.length == 0) {
+
+                    document.querySelector(".pagination .page-link.previous").click();
+                }
+
+
+                document.querySelector("#toast-result .toast-body").innerHTML = "<span>Silme işlemi başarıyla gerçekleştirildi.</span>";
+
+
+                var toastResult = document.querySelector("#toast-result");
+                var toastResultBody = document.querySelector("#toast-result .toast-body");
+
+
+                if (toastResultBody.children.length == 1) {
+
+                    var toast = new bootstrap.Toast(toastResult, {
+                        animation: true,
+                        autohide: true,
+                        delay: 10000
+                    });
+                    toast.show();
+                }
+
+
+
+                $.ajax({
+                    method: "POST",
+                    data: { page: pageNumber, rol: 5 },
+                    url: "/Admin/GetPaginationByPage/"
+                }).done(function (result) {
+
+                    var studentPaginationContainer = document.querySelector("#students-pagination-container");
+
+                    studentPaginationContainer.innerHTML = result;
+
+                    document.querySelector("#student-search").value = "";
+
+                    paginationAjax();
+
+                });
+
+
+            });
+        })
+
+
+        var studentSearch = document.querySelector("#student-search");
+
+        studentSearch.addEventListener("keyup", function () {
+
+
+            $.ajax({
+                method: "POST",
+                url: "/Admin/GetUsersBySearch",
+                data: { search: this.value, rol: 5 }
+
+            }).done(function (result) {
+
+                document.querySelector("#students-table-container").innerHTML = result;
+
+                var toolList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                var tooltipList = toolList.map(function (x) {
+                    return new bootstrap.Tooltip(x, {
+                        customClass: 'custom-tooltip',
+
+                    });
+
+                });
+
+
+
+                var deleteLinkButton = document.querySelectorAll('.delete-link');
+                var deleteModal = document.querySelector("#delete-modal");
+
+                for (var i = 0; i < deleteLinkButton.length; i++) {
+                    deleteLinkButton[i].addEventListener("click", function (e) {
+                        e.preventDefault();
+
+
+                        var studentId = this.getAttribute("student-id");
+
+                        var studentDeleteModal = new bootstrap.Modal(document.querySelector("#delete-modal"));
+                        studentDeleteModal.show();
+                        deleteModal.setAttribute("student-id", studentId);
+
+
+                    });
+                }
+
+            });
+        })
+
+        paginationAjax();
+
+        function paginationAjax() {
+
+            var paginationLinks = document.querySelectorAll(".pagination .page-item .page-link");
+
+            for (var i = 0; i < paginationLinks.length; i++) {
+
+                paginationLinks[i].addEventListener("click", function (e) {
+                    e.preventDefault();
+                    var pageNumber = this.getAttribute("page");
+
+                    $.ajax({
+                        method: "POST",
+                        data: { page: pageNumber, rol: 5 },
+                        url: "/Admin/GetUsersByPage/"
+                    }).done(function (result) {
+
+
+                        document.querySelector("#students-table-container").innerHTML = result;
+
+
+                        $.ajax({
+                            method: "POST",
+                            data: { page: pageNumber, rol: 5 },
+                            url: "/Admin/GetPaginationByPage/"
+                        }).done(function (result) {
+
+                            var studentPaginationContainer = document.querySelector("#students-pagination-container");
+
+                            studentPaginationContainer.innerHTML = result;
+
+                            document.querySelector("#student-search").value = "";
+
+                            paginationAjax();
+
+                        });
+
+
+
+                        var toolList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                        var tooltipList = toolList.map(function (x) {
+                            return new bootstrap.Tooltip(x, {
+                                customClass: 'custom-tooltip',
+
+                            });
+
+                        });
+
+
+
+                        var deleteLinkButton = document.querySelectorAll('.delete-link');
+                        var deleteModal = document.querySelector("#delete-modal");
+
+                        for (var i = 0; i < deleteLinkButton.length; i++) {
+                            deleteLinkButton[i].addEventListener("click", function (e) {
+                                e.preventDefault();
+
+
+                                var studentId = this.getAttribute("student-id");
+
+                                var studentDeleteModal = new bootstrap.Modal(document.querySelector("#delete-modal"));
+                                studentDeleteModal.show();
+                                deleteModal.setAttribute("student-id", studentId);
+
+
+                            });
+                        }
+
+
+                    });
+
+
+
+
+                });
+
+            }
+        }
+
+
+    </script>
+</body>
+</html>

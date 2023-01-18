@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Kullanıcı Rolü Seçme</title>
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link rel="icon" href="~/files/ms-icon-310x310.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+    <div class="position-absolute g-0 h-100 w-100 bg-container">
+        <div class="g-0 teacher-div">
+            <div class="teacher-bg"></div>
+            <div class="header-stripe"><h1 class="content-header">Öğretmen</h1></div>
+            <a href="/Teacher/Login" class="teacher-btn common-btn">
+                <i class="fa-solid fa-person-chalkboard"></i>
+            </a>
+        </div>
+
+        <div class="g-0 student-div">
+            <div class="student-bg"></div>
+            <div class="header-stripe"><h1 class="content-header">Öğrenci</h1></div>
+            <a href="/Student/Login" class="student-btn common-btn">
+                <i class="fa-solid fa-book-open-reader"></i>
+            </a>
+        </div>
+
+        <div class="g-0 admin-div">
+            <div class="admin-bg"></div>
+            <div class="header-stripe"><h1 class="content-header">Yönetici</h1></div>
+            <a href="/Admin/Login" class="admin-btn common-btn">
+                <i class="fa-solid fa-user-gear"></i>
+            </a>
+        </div>
+
+    </div>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+        let teacher_btn = document.querySelector(".teacher-btn");
+        let student_btn = document.querySelector(".student-btn");
+        let admin_btn = document.querySelector(".admin-btn");
+
+        let teacher_div = document.querySelector(".teacher-div");
+        let student_div = document.querySelector(".student-div");
+        let admin_div = document.querySelector(".admin-div");
+
+
+        function btn_expand(btn, div) {
+
+            btn.addEventListener("mouseover", function (e) {
+                div.classList.add("expand");
+
+            });
+
+            btn.addEventListener("mouseleave", function (e) {
+                div.classList.remove("expand");
+              
+            });
+        }
+
+        btn_expand(teacher_btn, teacher_div);
+        btn_expand(student_btn, student_div);
+        btn_expand(admin_btn, admin_div);
+
+
+
+
+    </script>
+</body>
+</html>

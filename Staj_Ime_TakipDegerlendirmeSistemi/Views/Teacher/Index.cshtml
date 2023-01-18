@@ -1,0 +1,1052 @@
+﻿@model Staj_Ime_TakipDegerlendirmeSistemi.Models.TeacherIndexViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Öğretmen Anasayfası</title>
+    <link href="~/Content/teacher_style.css" rel="stylesheet" />
+    <link rel="icon" href="~/files/ms-icon-310x310.png" type="image/x-icon">
+
+</head>
+<body class="teacher-index">
+    <div class="wrapper">
+
+        <div class="container">
+
+            @Html.Partial("_TeacherHeaderPartialView", Model.ogretmen)
+
+            <div id="toast-result" class="toast position-fixed start-50 translate-middle fs-5 @ViewBag.resultbg text-white border-0 p-2" style="width: 600px; margin-top: 68px; z-index:1111;">
+                <div class="d-flex align-items-center">
+                    <div class="toast-body d-flex align-items-center">
+                        @if (ViewBag.result != null)
+                        {
+                            <span> @ViewBag.result</span>
+
+                        }
+                    </div>
+                    <button class="btn btn-close btn-close-white m-auto me-2" type="button" data-bs-dismiss="toast"></button>
+                </div>
+
+            </div>
+
+
+
+
+
+            <div class="info-modal-container">
+
+            </div>
+
+
+
+
+            @if (Model.ogretmen.Rol == 3)
+            {
+
+                <div class="approval-modal-container">
+                    <div class="modal fade" id="approveApplicationModal">
+                        <div class="modal-dialog">
+                            @using (Html.BeginForm("ApproveApplication", "Teacher", FormMethod.Post))
+                            {
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Başvuruyu Onayla</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body" style="height:300px;">
+                                        <input id="ogrenciBasvuru" type="hidden" name="ogrenciBasvuru" value="" />
+                                        <div class="row m-4 fs-5 ">
+                                            <div class="col-12 text-center">Atanacak öğretmeni seçiniz:</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 text-center mb-5">
+                                                <select name="atananOgretmen" id="atananOgretmen" style="padding: 6px; background: #15803D; border: none; outline: none; color: white; ">
+                                                    @foreach (var item in Model.atanabilirOgretmenler)
+                                                    {
+
+                                                        <option value="@item.ID" style="padding:13px; border:none; outline:none; margin:13px; color:white;">@item.OkulSicilNo @item.Adi @item.Soyadi</option>
+
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                        <button type="submit" id="onayla" class="btn btn-success">Onayla</button>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reject-modal-container">
+                    <div class="modal fade" id="rejectApplicationModal">
+                        <div class="modal-dialog">
+                            @using (Html.BeginForm("RejectApplication", "Teacher", FormMethod.Post))
+                            {
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Başvuruyu Reddet</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                Başvuruyu reddetmek istediğinize emin misiniz?
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <input id="ogrenciBasvuru" type="hidden" name="ogrenciBasvuru" />
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                        <button type="submit" id="reddet" class="btn btn-danger">Reddet</button>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row mt-5 d-flex justify-content-center">
+
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <p class="card-category ms-auto text-center">Onaylanan Tüm Başvurular</p>
+                                <h3 class="card-title">
+                                    @Model.onaylananTumBasvurularCount
+                                    <small>Adet</small>
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                    <a href="javascript:;">Detaylı bilgi için</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-warning card-header-icon">
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
+                                <p class="card-category ms-auto text-center">Beklemedeki Tüm Başvurular</p>
+                                <h3 class="card-title">
+                                    @Model.beklemedeTumBasvurularCount
+                                    <small>Adet</small>
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="fa-solid fa-circle-info fs-4 text-warning"></i>
+                                    <a href="javascript:;">Detaylı bilgi için</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-danger card-header-icon">
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-user-xmark"></i>
+                                </div>
+                                <p class="card-category ms-auto text-center">Reddedilen Tüm Başvurular</p>
+                                <h3 class="card-title">
+                                    @Model.reddedilenTumBasvurularCount
+                                    <small>Adet</small>
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="fa-solid fa-circle-info fs-4 text-danger"></i>
+                                    <a href="javascript:;">Detaylı bilgi için</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            }
+
+
+
+            <div class="row mt-5 d-flex justify-content-center">
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-success card-header-icon">
+                            <div class="card-icon">
+                                <i class="fa-solid fa-user-check"></i>
+
+                            </div>
+                            <p class="card-category ms-auto text-center">Bana Atanmış Öğrenciler</p>
+                            <h3 class="card-title">
+                                @Model.atanmisOgrenciAdet
+                                <small>Adet</small>
+                            </h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                <a href="javascript:;">Detaylı bilgi için</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-success card-header-icon">
+                            <div class="card-icon">
+                                <i class="fa-solid fa-check-double"></i>
+                            </div>
+                            <p class="card-category ms-auto text-center">Notlandırdığım Başvurular</p>
+                            <h3 class="card-title">
+                                @Model.degerlendirilenBasvuruAdet
+                                <small>Adet</small>
+                            </h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                <a href="javascript:;">Detaylı bilgi için</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-warning card-header-icon">
+                            <div class="card-icon">
+                                <i class="fa-solid fa-hourglass-half"></i>
+                            </div>
+                            <p class="card-category ms-auto text-center">Notlandırmadığım Başvurular</p>
+                            <h3 class="card-title">
+                                @Model.degerlendirilmemisBasvuruAdet
+                                <small>Adet</small>
+                            </h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="fa-solid fa-circle-info fs-4 text-success"></i>
+                                <a href="javascript:;">Detaylı bilgi için</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row mt-5">
+                <div class="col-12">
+
+                    <div id="tumAtanmisBasvurularCard" class="card card-panel-table">
+                        <div class="card-header card-header-success">
+
+                            <ul class="nav nav-pills" id="myTab">
+                                <li class="d-flex align-items-center me-4"><b class="fs-5">Onaylı Atanmış Başvurular</b> </li>
+
+                                <li class="nav-item">
+                                    <button param="1" page="1" class="nav-link active" data-bs-toggle="tab" data-bs-target="#tumu">
+                                        <i class="fa-solid fa-list-ul"></i> Tümü
+                                    </button>
+                                </li>
+
+
+
+                                <li class="nav-item">
+                                    <button param="2" page="1" class="nav-link" data-bs-toggle="tab" data-bs-target="#staj1">
+                                        <i class="fa-solid fa-1"></i> Staj-I
+                                    </button>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <button param="3" page="1" class="nav-link" data-bs-toggle="tab" data-bs-target="#staj2">
+                                        <i class="fa-solid fa-2"></i> Staj-II
+                                    </button>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <button param="4" page="1" class="nav-link" data-bs-toggle="tab" data-bs-target="#ime">
+                                        <i class="fa-solid fa-3"></i> İme
+                                    </button>
+                                </li>
+                            </ul>
+
+
+                        </div>
+
+
+                        <div class="card-body table-responsive" style="height:300px;">
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tumu">
+
+                                    @Html.Partial("_TeacherIndexTableOnlyPartialView", Model.onaylananAtanmisBasvurular)
+
+                                </div>
+
+                                <div class="tab-pane fade" id="staj1">
+                                    @Html.Partial("_TeacherIndexTableOnlyPartialView", Model.stajIAtanmisBasvurular)
+                                </div>
+
+
+                                <div class="tab-pane fade" id="staj2">
+                                    @Html.Partial("_TeacherIndexTableOnlyPartialView", Model.stajIIAtanmisBasvurular)
+                                </div>
+
+                                <div class="tab-pane fade" id="ime">
+                                    @Html.Partial("_TeacherIndexTableOnlyPartialView", Model.imeAtanmisBasvurular)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row mt-3 ">
+                <div id="applications-only-pagination-container" class="col-3 ms-auto">
+                    @Html.Partial("_TeacherIndexPaginationOnlyPartialView", Model.paginationOnlyViewModel)
+
+                </div>
+            </div>
+
+
+            @if (Model.ogretmen.Rol == 3)
+            {
+
+                <div class="row mt-5">
+                    <div class="col-12">
+
+                        <div id="tumBasvurularCard" class="card card-panel-table">
+                            <div class="card-header card-header-warning">
+
+                                <ul class="nav nav-pills" id="myTab">
+                                    <li class="d-flex align-items-center me-4"><b class="fs-5">Tüm Başvurular</b> </li>
+
+                                    <li class="nav-item">
+                                        <button param="1" page="1" class="nav-link" data-bs-toggle="tab" data-bs-target="#onaylanan">
+                                            <i class="fa-solid fa-check"></i> Onaylanan
+                                        </button>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <button param="2" page="1" class="nav-link active" data-bs-toggle="tab" data-bs-target="#beklemede">
+                                            <i class="fa-solid fa-hourglass-start"></i>Beklemede
+                                        </button>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <button param="3" page="1" class="nav-link" data-bs-toggle="tab" data-bs-target="#reddedilen">
+                                            <i class="fa-solid fa-xmark"></i> Reddedilen
+                                        </button>
+                                    </li>
+
+
+
+                                    <li class="basvuru-tur ms-auto">
+                                        <button param="1" class="basvuru-tur-link active">
+                                            <i class="fa-solid fa-list-ul"></i> Tümü
+                                        </button>
+                                    </li>
+
+
+
+                                    <li class="basvuru-tur">
+                                        <button param="2" class="basvuru-tur-link">
+                                            <i class="fa-solid fa-1"></i> Staj-I
+                                        </button>
+                                    </li>
+
+
+                                    <li class="basvuru-tur">
+                                        <button param="3" class="basvuru-tur-link">
+                                            <i class="fa-solid fa-2"></i> Staj-II
+                                        </button>
+                                    </li>
+
+
+                                    <li class="basvuru-tur">
+                                        <button param="4" class="basvuru-tur-link">
+                                            <i class="fa-solid fa-3"></i> İme
+                                        </button>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+
+
+                            <div class="card-body table-responsive" style="height:300px;">
+
+                                <div class="tab-content">
+                                    <div class="tab-pane fade" id="onaylanan">
+
+                                        @Html.Partial("_TeacherIndexTablePartialView", Model.onaylananTumBasvurular)
+
+                                    </div>
+
+                                    <div class="tab-pane fade  show active" id="beklemede">
+                                        @Html.Partial("_TeacherIndexTablePartialView", Model.beklemedeTumBasvurular)
+                                    </div>
+
+
+                                    <div class="tab-pane fade" id="reddedilen">
+                                        @Html.Partial("_TeacherIndexTablePartialView", Model.reddedilenTumBasvurular)
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+
+                <div class="row mt-3 ">
+                    <div id="applications-pagination-container" class="col-3 ms-auto">
+                        @Html.Partial("_TeacherIndexPaginationPartialView", Model.paginationViewModel)
+
+                    </div>
+                </div>
+            }
+
+
+
+
+
+
+
+        </div>
+
+
+        @Html.Partial("_TeacherFooterPartialView")
+
+
+
+    </div>
+
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script>
+
+
+        var toastResult = document.querySelector("#toast-result");
+        var toastResultBody = document.querySelector("#toast-result .toast-body");
+
+
+        if (toastResultBody.children.length == 1) {
+
+            var toast = new bootstrap.Toast(toastResult, {
+                animation: true,
+                autohide: true,
+                delay: 4000
+            });
+            toast.show();
+        }
+
+
+
+
+
+        function onlyTableTooltipActivate() {
+            var toolList = [].slice.call(document.querySelectorAll('#tumAtanmisBasvurularCard [data-bs-toggle="tooltip"]'));
+            var tooltipList = toolList.map(function (x) {
+                return new bootstrap.Tooltip(x, {
+                    customClass: 'custom-tooltip',
+
+                });
+
+            });
+        }
+
+        function onlyTableInfoModalActivate() {
+            var ogrenciInfoLink = document.querySelectorAll("#tumAtanmisBasvurularCard .info-link");
+
+            for (var i = 0; i < ogrenciInfoLink.length; i++) {
+                ogrenciInfoLink.item(i).addEventListener("click", function (e) {
+                    var ogrenciId = this.getAttribute("student-id");
+
+                    $.ajax({
+                        method: "POST",
+                        data: { id: ogrenciId },
+                        url: "/Teacher/GetStudentInfoByModal/"
+                    }).done(function (result) {
+
+                        var modalContainer = document.querySelector(".info-modal-container");
+
+                        modalContainer.innerHTML = result;
+
+                        var modal = document.querySelector("#basvuranOgrenci");
+
+                        var myModal = new bootstrap.Modal(modal);
+                        myModal.show();
+
+                    });
+                });
+            }
+        }
+
+        function rateApplication() {
+            var notlandirLinks = document.querySelectorAll("#tumAtanmisBasvurularCard .notlandir-link");
+
+            for (var i = 0; i < notlandirLinks.length; i++) {
+                notlandirLinks.item(i).addEventListener("click", function (e) {
+
+                    var rateApplicationContainer = e.currentTarget.nextElementSibling;
+
+                    rateApplicationContainer.classList.toggle("active");
+                    e.currentTarget.classList.toggle("active");
+
+                });
+            }
+
+        }
+
+        
+
+
+        function paginationOnlyAjax() {
+
+            var paginationLinks = document.querySelectorAll("#applications-only-pagination-container .pagination .page-item .page-link");
+
+
+            for (var i = 0; i < paginationLinks.length; i++) {
+
+
+
+                paginationLinks[i].addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    var basvuruTurLink = document.querySelector("#tumAtanmisBasvurularCard .nav-link.active");
+                    var basvuruTur = basvuruTurLink.getAttribute("param");
+
+                    var pageNumber = this.getAttribute("page");
+
+                    basvuruTurLink.setAttribute("page", pageNumber);
+
+
+                    $.ajax({
+                        method: "POST",
+                        data: { page: pageNumber, durum: 1, tur: basvuruTur },
+                        url: "/Teacher/GetOnlyApplicationsByPage/"
+                    }).done(function (result) {
+                        
+                        switch (basvuruTur) {
+                            case "1": document.querySelector("#tumu").innerHTML = result;
+                                break;
+                            case "2": document.querySelector("#staj1").innerHTML = result;
+                                break;
+                            case "3": document.querySelector("#staj2").innerHTML = result;
+                                break;
+                            case "4": document.querySelector("#ime").innerHTML = result;
+                                break;
+
+                        }
+
+                        $.ajax({
+                            method: "POST",
+                            data: { page: pageNumber, durum: 1, tur: basvuruTur },
+                            url: "/Teacher/GetOnlyPaginationByPage/"
+                        }).done(function (result) {
+                            
+                            var applicationsOnlyPaginationContainer = document.querySelector("#applications-only-pagination-container");
+
+                            applicationsOnlyPaginationContainer.innerHTML = result;
+
+                            onlyTableTooltipActivate();
+                            onlyTableInfoModalActivate();
+                            paginationOnlyAjax();
+                            rateApplication();
+                            
+                        });
+
+
+
+
+                    });
+
+
+                   
+
+
+                    
+
+
+
+                });
+
+            }
+        }
+
+        rateApplication();
+        onlyTableTooltipActivate();
+        onlyTableInfoModalActivate();
+        paginationOnlyAjax();
+        rememberPage();
+
+        /*Atanmış başvurular tab paneli için durum değişikliğinde sayfalama linklerinin
+         en son kalınan sayfa için yenilenmesi*/
+
+        function rememberPage() {
+            var basvuruTurLinks = document.querySelectorAll("#tumAtanmisBasvurularCard .nav-link");
+
+            for (var i = 0; i < basvuruTurLinks.length; i++) {
+
+                basvuruTurLinks.item(i).addEventListener("click", function (e) {
+                    var basvuruTuru = this.getAttribute("param");
+                    var basvuruTurLastPage = this.getAttribute("page");
+
+
+                    $.ajax({
+                        method: "POST",
+                        data: { page: basvuruTurLastPage, durum: 1, tur: basvuruTuru },
+                        url: "/Teacher/GetOnlyPaginationByPage/"
+                    }).done(function (result) {
+
+                        var applicationsOnlyPaginationContainer = document.querySelector("#applications-only-pagination-container");
+
+                        applicationsOnlyPaginationContainer.innerHTML = result;
+
+                        paginationOnlyAjax();
+                       
+                        
+
+
+                    });
+
+                })
+
+            }
+        }
+       
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if (document.querySelector("#tumBasvurularCard") != null) {
+
+
+            function tooltipActivate() {
+                var toolList = [].slice.call(document.querySelectorAll('#tumBasvurularCard [data-bs-toggle="tooltip"]'));
+                var tooltipList = toolList.map(function (x) {
+                    return new bootstrap.Tooltip(x, {
+                        customClass: 'custom-tooltip',
+
+                    });
+
+                });
+            }
+
+
+
+            /*Başvuru durum card headerının dinamik olarak renginin değişmesi*/
+            var cardPanelTable = document.querySelector("#tumBasvurularCard .card-header");
+
+            var cardPanelTableNavItem = document.querySelectorAll("#tumBasvurularCard .card-header .nav-item .nav-link");
+
+            cardPanelTableNavItem[0].addEventListener("click", function () {
+
+                cardPanelTable.className = "card-header card-header-success";
+
+            });
+
+            cardPanelTableNavItem[1].addEventListener("click", function () {
+
+                cardPanelTable.className = "card-header card-header-warning";
+
+            });
+
+            cardPanelTableNavItem[2].addEventListener("click", function () {
+
+                cardPanelTable.className = "card-header card-header-danger";
+
+            });
+
+
+
+
+
+
+
+            /*Tüm Başvurular tab paneli için durum değişikliğinde sayfalama linklerinin
+             en son kalınan sayfa için yenilenmesi*/
+
+
+
+            var basvuruDurumLinks = document.querySelectorAll("#tumBasvurularCard .nav-link");
+
+            for (var i = 0; i < basvuruDurumLinks.length; i++) {
+
+                basvuruDurumLinks.item(i).addEventListener("click", function (e) {
+                    var basvuruTuru = document.querySelector("#tumBasvurularCard .basvuru-tur-link.active").getAttribute("param");
+                    var basvuruDurumLastPage = this.getAttribute("page");
+                    var basvuruDurum = this.getAttribute("param");
+
+                    $.ajax({
+                        method: "POST",
+                        data: { page: basvuruDurumLastPage, durum: basvuruDurum, tur: basvuruTuru },
+                        url: "/Teacher/GetPaginationByPage/"
+                    }).done(function (result) {
+
+                        var applicationsPaginationContainer = document.querySelector("#applications-pagination-container");
+
+                        applicationsPaginationContainer.innerHTML = result;
+
+
+                        paginationAjax();
+
+
+                    });
+
+                })
+
+            }
+
+
+            var basvuruTurLinks = document.querySelectorAll("#tumBasvurularCard .basvuru-tur-link");
+            /*Başvuru Türüne göre ajax ile başvurular tablosunun yüklenmesi*/
+
+            for (var i = 0; i < basvuruTurLinks.length; i++) {
+                basvuruTurLinks.item(i).addEventListener("click", function (e) {
+
+
+                    for (var i = 0; i < basvuruTurLinks.length; i++) {
+                        basvuruTurLinks.item(i).classList.remove("active");
+
+                    }
+                    //basvuruTurLinks.forEach(function (item, index) {
+                    //    item.classList.remove("active");
+
+                    //});
+
+                    this.classList.add("active");
+
+
+
+
+                    var basvuruTuruButton = document.querySelector("#tumBasvurularCard .basvuru-tur-link.active");
+
+                    var basvuruTuruParam = basvuruTuruButton.getAttribute("param");
+
+                    $.ajax({
+                        method: "POST",
+                        data: { durum: "1", tur: basvuruTuruParam },
+                        url: "/Teacher/GetApplicationsByParams/"
+                    }).done(function (result) {
+
+
+                        var tab = document.querySelector("#tumBasvurularCard .tab-content #onaylanan");
+
+                        tab.innerHTML = result;
+
+                        $.ajax({
+                            method: "POST",
+                            data: { durum: "2", tur: basvuruTuruParam },
+                            url: "/Teacher/GetApplicationsByParams/"
+                        }).done(function (result) {
+
+                            var tab = document.querySelector("#tumBasvurularCard .tab-content #beklemede");
+
+                            tab.innerHTML = result;
+
+                            $.ajax({
+                                method: "POST",
+                                data: { durum: "3", tur: basvuruTuruParam },
+                                url: "/Teacher/GetApplicationsByParams/"
+                            }).done(function (result) {
+
+                                var tab = document.querySelector("#tumBasvurularCard .tab-content #reddedilen");
+
+                                tab.innerHTML = result;
+
+                                infoModalActivate();
+                                approveApplication();
+                                rejectApplication();
+                                tooltipActivate();
+
+
+                                var basvuruDurumLinks = document.querySelectorAll("#tumBasvurularCard .nav-link");
+
+                                basvuruDurumLinks.item(0).setAttribute("page", 1);
+                                basvuruDurumLinks.item(1).setAttribute("page", 1);
+                                basvuruDurumLinks.item(2).setAttribute("page", 1);
+
+
+
+                                var basvuruDurum = document.querySelector("#tumBasvurularCard .nav-link.active").getAttribute("param");
+
+
+                                $.ajax({
+                                    method: "POST",
+                                    data: { page: 1, durum: basvuruDurum, tur: basvuruTuruParam },
+                                    url: "/Teacher/GetPaginationByPage/"
+                                }).done(function (result) {
+
+                                    var applicationsPaginationContainer = document.querySelector("#applications-pagination-container");
+
+                                    applicationsPaginationContainer.innerHTML = result;
+
+
+                                    paginationAjax();
+
+
+                                });
+
+                            });
+
+
+
+                        });
+
+
+
+
+
+
+
+                    });
+
+
+
+                })
+            }
+
+
+
+
+
+
+
+
+            function infoModalActivate() {
+                var ogrenciInfoLink = document.querySelectorAll("#tumBasvurularCard .info-link");
+
+                for (var i = 0; i < ogrenciInfoLink.length; i++) {
+                    ogrenciInfoLink.item(i).addEventListener("click", function (e) {
+                        var ogrenciId = this.getAttribute("student-id");
+
+                        $.ajax({
+                            method: "POST",
+                            data: { id: ogrenciId },
+                            url: "/Teacher/GetStudentInfoByModal/"
+                        }).done(function (result) {
+
+                            var modalContainer = document.querySelector(".info-modal-container");
+
+                            modalContainer.innerHTML = result;
+
+                            var modal = document.querySelector("#basvuranOgrenci");
+
+                            var myModal = new bootstrap.Modal(modal);
+                            myModal.show();
+
+                        });
+                    });
+                }
+
+
+            }
+
+            function approveApplication() {
+
+                var basvuruOnayLink = document.querySelectorAll(".onayla-link");
+
+                for (var i = 0; i < basvuruOnayLink.length; i++) {
+                    basvuruOnayLink.item(i).addEventListener("click", function (e) {
+                        var basvuruId = this.getAttribute("basvuru-id");
+
+                        var approveApplicationModal = document.querySelector("#approveApplicationModal");
+
+                        approveApplicationModal.setAttribute("basvuru-id", basvuruId);
+
+                        document.querySelector("#approveApplicationModal #ogrenciBasvuru").setAttribute("value", basvuruId);
+
+                        myModal = new bootstrap.Modal(approveApplicationModal);
+                        myModal.show();
+
+
+                    });
+                }
+            }
+
+            function rejectApplication() {
+
+                var basvuruReddetLink = document.querySelectorAll(".reddet-link");
+
+                for (var i = 0; i < basvuruReddetLink.length; i++) {
+                    basvuruReddetLink.item(i).addEventListener("click", function (e) {
+                        var basvuruId = this.getAttribute("basvuru-id");
+
+                        var rejectApplicationModal = document.querySelector("#rejectApplicationModal");
+
+                        rejectApplicationModal.setAttribute("basvuru-id", basvuruId);
+
+                        document.querySelector("#rejectApplicationModal #ogrenciBasvuru").setAttribute("value", basvuruId);
+
+                        myModal = new bootstrap.Modal(rejectApplicationModal);
+                        myModal.show();
+
+
+                    });
+                }
+            }
+
+            function paginationAjax() {
+
+                var paginationLinks = document.querySelectorAll("#applications-pagination-container .pagination .page-item .page-link");
+
+
+                for (var i = 0; i < paginationLinks.length; i++) {
+                    var basvuruDurum = document.querySelector("#tumBasvurularCard .nav-link.active").getAttribute("param");
+
+                    var basvuruTur = document.querySelector("#tumBasvurularCard .basvuru-tur-link.active").getAttribute("param");
+
+
+                    paginationLinks[i].addEventListener("click", function (e) {
+                        e.preventDefault();
+
+                        var pageNumber = this.getAttribute("page");
+
+                        var basvuruDurumLink = document.querySelector("#tumBasvurularCard .nav-link.active");
+                        basvuruDurumLink.setAttribute("page", pageNumber);
+
+
+                        $.ajax({
+                            method: "POST",
+                            data: { page: pageNumber, durum: basvuruDurum, tur: basvuruTur },
+                            url: "/Teacher/GetApplicationsByPage/"
+                        }).done(function (result) {
+
+                            switch (basvuruDurum) {
+                                case "1": document.querySelector("#onaylanan").innerHTML = result;
+                                    break;
+                                case "2": document.querySelector("#beklemede").innerHTML = result;
+                                    break;
+                                case "3": document.querySelector("#reddedilen").innerHTML = result;
+                                    break;
+
+                            }
+
+
+                            tooltipActivate();
+                            infoModalActivate();
+                            approveApplication();
+                            rejectApplication();
+
+
+                            $.ajax({
+                                method: "POST",
+                                data: { page: pageNumber, durum: basvuruDurum, tur: basvuruTur },
+                                url: "/Teacher/GetPaginationByPage/"
+                            }).done(function (result) {
+
+                                var applicationsPaginationContainer = document.querySelector("#applications-pagination-container");
+
+                                applicationsPaginationContainer.innerHTML = result;
+
+                                paginationAjax();
+
+
+                            });
+
+
+
+                        });
+
+
+
+                    });
+
+                }
+            }
+
+
+            tooltipActivate();
+            infoModalActivate();
+            approveApplication();
+            rejectApplication();
+            paginationAjax();
+
+
+
+
+        }
+
+
+
+
+
+
+    </script>
+</body>
+</html>

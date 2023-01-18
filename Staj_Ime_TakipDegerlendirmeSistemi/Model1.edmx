@@ -1,0 +1,814 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BasvuruDurum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DurumAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Basvurular">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BasvuruTur" Type="int" Nullable="false" />
+          <Property Name="BasvuranOgrenci" Type="int" Nullable="false" />
+          <Property Name="BasvuruDurumu" Type="int" Nullable="false" />
+          <Property Name="DegerlendirenOgretmen" Type="int" />
+          <Property Name="BasvuruTarih" Type="datetime" Nullable="false" />
+          <Property Name="BasariNotu" Type="tinyint" />
+          <Property Name="Donem" Type="nvarchar" MaxLength="50" />
+          <Property Name="Firma" Type="nvarchar" MaxLength="50" />
+          <Property Name="TarihAraligi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BasvuruTuru">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BasvuruAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Belgeler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BelgeAdresi" Type="nvarchar" MaxLength="130" Nullable="false" />
+          <Property Name="Basvuru" Type="int" Nullable="false" />
+          <Property Name="BelgeTuru" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BelgeTurleri">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BelgeTuru" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bolumler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BolumAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fakulte" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fakulteler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FakulteAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Komisyonlar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KomisyonAdi" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KomisyonOgretmen">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ogretmen" Type="int" Nullable="false" />
+          <Property Name="Komisyon" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TCNo" Type="char" MaxLength="11" />
+          <Property Name="Adi" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Soyadi" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="10" />
+          <Property Name="Sinifi" Type="int" />
+          <Property Name="Fotograf" Type="nvarchar" MaxLength="100" />
+          <Property Name="OkulSicilNo" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="Bolum" Type="int" />
+          <Property Name="KayitTarihi" Type="datetime" />
+          <Property Name="Rol" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roller">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RolAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Siniflar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sinif" Type="nvarchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Basvurular_BasvuruDurum">
+          <End Role="BasvuruDurum" Type="Self.BasvuruDurum" Multiplicity="1" />
+          <End Role="Basvurular" Type="Self.Basvurular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BasvuruDurum">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Basvurular">
+              <PropertyRef Name="BasvuruDurumu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basvurular_BasvuruTuru">
+          <End Role="BasvuruTuru" Type="Self.BasvuruTuru" Multiplicity="1" />
+          <End Role="Basvurular" Type="Self.Basvurular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BasvuruTuru">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Basvurular">
+              <PropertyRef Name="BasvuruTur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basvurular_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+          <End Role="Basvurular" Type="Self.Basvurular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Basvurular">
+              <PropertyRef Name="BasvuranOgrenci" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basvurular_Kullanicilar1">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="Basvurular" Type="Self.Basvurular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Basvurular">
+              <PropertyRef Name="DegerlendirenOgretmen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Belgeler_Basvurular">
+          <End Role="Basvurular" Type="Self.Basvurular" Multiplicity="1" />
+          <End Role="Belgeler" Type="Self.Belgeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basvurular">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Belgeler">
+              <PropertyRef Name="Basvuru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Belgeler_BelgeTurleri">
+          <End Role="BelgeTurleri" Type="Self.BelgeTurleri" Multiplicity="1" />
+          <End Role="Belgeler" Type="Self.Belgeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BelgeTurleri">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Belgeler">
+              <PropertyRef Name="BelgeTuru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bolumler_Fakulteler">
+          <End Role="Fakulteler" Type="Self.Fakulteler" Multiplicity="1" />
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fakulteler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bolumler">
+              <PropertyRef Name="Fakulte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KomisyonOgretmen_Komisyonlar">
+          <End Role="Komisyonlar" Type="Self.Komisyonlar" Multiplicity="1" />
+          <End Role="KomisyonOgretmen" Type="Self.KomisyonOgretmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Komisyonlar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KomisyonOgretmen">
+              <PropertyRef Name="Komisyon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KomisyonOgretmen_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+          <End Role="KomisyonOgretmen" Type="Self.KomisyonOgretmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KomisyonOgretmen">
+              <PropertyRef Name="Ogretmen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kullanicilar_Bolumler">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="0..1" />
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kullanicilar">
+              <PropertyRef Name="Bolum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kullanicilar_Roller">
+          <End Role="Roller" Type="Self.Roller" Multiplicity="1" />
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roller">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kullanicilar">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kullanicilar_Siniflar">
+          <End Role="Siniflar" Type="Self.Siniflar" Multiplicity="0..1" />
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siniflar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kullanicilar">
+              <PropertyRef Name="Sinifi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="BasvuruDurum" EntityType="Self.BasvuruDurum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Basvurular" EntityType="Self.Basvurular" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BasvuruTuru" EntityType="Self.BasvuruTuru" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Belgeler" EntityType="Self.Belgeler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BelgeTurleri" EntityType="Self.BelgeTurleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bolumler" EntityType="Self.Bolumler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fakulteler" EntityType="Self.Fakulteler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Komisyonlar" EntityType="Self.Komisyonlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KomisyonOgretmen" EntityType="Self.KomisyonOgretmen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roller" EntityType="Self.Roller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Siniflar" EntityType="Self.Siniflar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Basvurular_BasvuruDurum" Association="Self.FK_Basvurular_BasvuruDurum">
+            <End Role="BasvuruDurum" EntitySet="BasvuruDurum" />
+            <End Role="Basvurular" EntitySet="Basvurular" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basvurular_BasvuruTuru" Association="Self.FK_Basvurular_BasvuruTuru">
+            <End Role="BasvuruTuru" EntitySet="BasvuruTuru" />
+            <End Role="Basvurular" EntitySet="Basvurular" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basvurular_Kullanicilar" Association="Self.FK_Basvurular_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Basvurular" EntitySet="Basvurular" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basvurular_Kullanicilar1" Association="Self.FK_Basvurular_Kullanicilar1">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Basvurular" EntitySet="Basvurular" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Belgeler_Basvurular" Association="Self.FK_Belgeler_Basvurular">
+            <End Role="Basvurular" EntitySet="Basvurular" />
+            <End Role="Belgeler" EntitySet="Belgeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Belgeler_BelgeTurleri" Association="Self.FK_Belgeler_BelgeTurleri">
+            <End Role="BelgeTurleri" EntitySet="BelgeTurleri" />
+            <End Role="Belgeler" EntitySet="Belgeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bolumler_Fakulteler" Association="Self.FK_Bolumler_Fakulteler">
+            <End Role="Fakulteler" EntitySet="Fakulteler" />
+            <End Role="Bolumler" EntitySet="Bolumler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KomisyonOgretmen_Komisyonlar" Association="Self.FK_KomisyonOgretmen_Komisyonlar">
+            <End Role="Komisyonlar" EntitySet="Komisyonlar" />
+            <End Role="KomisyonOgretmen" EntitySet="KomisyonOgretmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KomisyonOgretmen_Kullanicilar" Association="Self.FK_KomisyonOgretmen_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="KomisyonOgretmen" EntitySet="KomisyonOgretmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanicilar_Bolumler" Association="Self.FK_Kullanicilar_Bolumler">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanicilar_Roller" Association="Self.FK_Kullanicilar_Roller">
+            <End Role="Roller" EntitySet="Roller" />
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanicilar_Siniflar" Association="Self.FK_Kullanicilar_Siniflar">
+            <End Role="Siniflar" EntitySet="Siniflar" />
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BasvuruDurum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DurumAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Basvurular" Relationship="Self.FK_Basvurular_BasvuruDurum" FromRole="BasvuruDurum" ToRole="Basvurular" />
+        </EntityType>
+        <EntityType Name="Basvurular">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BasvuruTur" Type="Int32" Nullable="false" />
+          <Property Name="BasvuranOgrenci" Type="Int32" Nullable="false" />
+          <Property Name="BasvuruDurumu" Type="Int32" Nullable="false" />
+          <Property Name="DegerlendirenOgretmen" Type="Int32" />
+          <Property Name="BasvuruTarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BasariNotu" Type="Byte" />
+          <Property Name="Donem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Firma" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TarihAraligi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BasvuruDurum" Relationship="Self.FK_Basvurular_BasvuruDurum" FromRole="Basvurular" ToRole="BasvuruDurum" />
+          <NavigationProperty Name="BasvuruTuru" Relationship="Self.FK_Basvurular_BasvuruTuru" FromRole="Basvurular" ToRole="BasvuruTuru" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Basvurular_Kullanicilar" FromRole="Basvurular" ToRole="Kullanicilar" />
+          <NavigationProperty Name="Kullanicilar1" Relationship="Self.FK_Basvurular_Kullanicilar1" FromRole="Basvurular" ToRole="Kullanicilar" />
+          <NavigationProperty Name="Belgeler" Relationship="Self.FK_Belgeler_Basvurular" FromRole="Basvurular" ToRole="Belgeler" />
+        </EntityType>
+        <EntityType Name="BasvuruTuru">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BasvuruAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Basvurular" Relationship="Self.FK_Basvurular_BasvuruTuru" FromRole="BasvuruTuru" ToRole="Basvurular" />
+        </EntityType>
+        <EntityType Name="Belgeler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BelgeAdresi" Type="String" MaxLength="130" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Basvuru" Type="Int32" Nullable="false" />
+          <Property Name="BelgeTuru" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Basvurular" Relationship="Self.FK_Belgeler_Basvurular" FromRole="Belgeler" ToRole="Basvurular" />
+          <NavigationProperty Name="BelgeTurleri" Relationship="Self.FK_Belgeler_BelgeTurleri" FromRole="Belgeler" ToRole="BelgeTurleri" />
+        </EntityType>
+        <EntityType Name="BelgeTurleri">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BelgeTuru" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Belgeler" Relationship="Self.FK_Belgeler_BelgeTurleri" FromRole="BelgeTurleri" ToRole="Belgeler" />
+        </EntityType>
+        <EntityType Name="Bolumler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BolumAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fakulte" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fakulteler" Relationship="Self.FK_Bolumler_Fakulteler" FromRole="Bolumler" ToRole="Fakulteler" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Kullanicilar_Bolumler" FromRole="Bolumler" ToRole="Kullanicilar" />
+        </EntityType>
+        <EntityType Name="Fakulteler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FakulteAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bolumler" Relationship="Self.FK_Bolumler_Fakulteler" FromRole="Fakulteler" ToRole="Bolumler" />
+        </EntityType>
+        <EntityType Name="Komisyonlar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KomisyonAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="KomisyonOgretmen" Relationship="Self.FK_KomisyonOgretmen_Komisyonlar" FromRole="Komisyonlar" ToRole="KomisyonOgretmen" />
+        </EntityType>
+        <EntityType Name="KomisyonOgretmen">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ogretmen" Type="Int32" Nullable="false" />
+          <Property Name="Komisyon" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Komisyonlar" Relationship="Self.FK_KomisyonOgretmen_Komisyonlar" FromRole="KomisyonOgretmen" ToRole="Komisyonlar" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_KomisyonOgretmen_Kullanicilar" FromRole="KomisyonOgretmen" ToRole="Kullanicilar" />
+        </EntityType>
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TCNo" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="Adi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Soyadi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Sinifi" Type="Int32" />
+          <Property Name="Fotograf" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OkulSicilNo" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Bolum" Type="Int32" />
+          <Property Name="KayitTarihi" Type="DateTime" Precision="3" />
+          <Property Name="Rol" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Basvurular" Relationship="Self.FK_Basvurular_Kullanicilar" FromRole="Kullanicilar" ToRole="Basvurular" />
+          <NavigationProperty Name="Basvurular1" Relationship="Self.FK_Basvurular_Kullanicilar1" FromRole="Kullanicilar" ToRole="Basvurular" />
+          <NavigationProperty Name="Bolumler" Relationship="Self.FK_Kullanicilar_Bolumler" FromRole="Kullanicilar" ToRole="Bolumler" />
+          <NavigationProperty Name="KomisyonOgretmen" Relationship="Self.FK_KomisyonOgretmen_Kullanicilar" FromRole="Kullanicilar" ToRole="KomisyonOgretmen" />
+          <NavigationProperty Name="Roller" Relationship="Self.FK_Kullanicilar_Roller" FromRole="Kullanicilar" ToRole="Roller" />
+          <NavigationProperty Name="Siniflar" Relationship="Self.FK_Kullanicilar_Siniflar" FromRole="Kullanicilar" ToRole="Siniflar" />
+        </EntityType>
+        <EntityType Name="Roller">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Kullanicilar_Roller" FromRole="Roller" ToRole="Kullanicilar" />
+        </EntityType>
+        <EntityType Name="Siniflar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sinif" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Kullanicilar_Siniflar" FromRole="Siniflar" ToRole="Kullanicilar" />
+        </EntityType>
+        <Association Name="FK_Basvurular_BasvuruDurum">
+          <End Role="BasvuruDurum" Type="Self.BasvuruDurum" Multiplicity="1" />
+          <End Role="Basvurular" Type="Self.Basvurular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BasvuruDurum">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Basvurular">
+              <PropertyRef Name="BasvuruDurumu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basvurular_BasvuruTuru">
+          <End Role="BasvuruTuru" Type="Self.BasvuruTuru" Multiplicity="1" />
+          <End Role="Basvurular" Type="Self.Basvurular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BasvuruTuru">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Basvurular">
+              <PropertyRef Name="BasvuruTur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basvurular_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+          <End Role="Basvurular" Type="Self.Basvurular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Basvurular">
+              <PropertyRef Name="BasvuranOgrenci" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Basvurular_Kullanicilar1">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+          <End Role="Basvurular" Type="Self.Basvurular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Basvurular">
+              <PropertyRef Name="DegerlendirenOgretmen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Belgeler_Basvurular">
+          <End Role="Basvurular" Type="Self.Basvurular" Multiplicity="1" />
+          <End Role="Belgeler" Type="Self.Belgeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Basvurular">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Belgeler">
+              <PropertyRef Name="Basvuru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Belgeler_BelgeTurleri">
+          <End Role="BelgeTurleri" Type="Self.BelgeTurleri" Multiplicity="1" />
+          <End Role="Belgeler" Type="Self.Belgeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BelgeTurleri">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Belgeler">
+              <PropertyRef Name="BelgeTuru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bolumler_Fakulteler">
+          <End Role="Fakulteler" Type="Self.Fakulteler" Multiplicity="1" />
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fakulteler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bolumler">
+              <PropertyRef Name="Fakulte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kullanicilar_Bolumler">
+          <End Role="Bolumler" Type="Self.Bolumler" Multiplicity="0..1" />
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolumler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kullanicilar">
+              <PropertyRef Name="Bolum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KomisyonOgretmen_Komisyonlar">
+          <End Role="Komisyonlar" Type="Self.Komisyonlar" Multiplicity="1" />
+          <End Role="KomisyonOgretmen" Type="Self.KomisyonOgretmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Komisyonlar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KomisyonOgretmen">
+              <PropertyRef Name="Komisyon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KomisyonOgretmen_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+          <End Role="KomisyonOgretmen" Type="Self.KomisyonOgretmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KomisyonOgretmen">
+              <PropertyRef Name="Ogretmen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kullanicilar_Roller">
+          <End Role="Roller" Type="Self.Roller" Multiplicity="1" />
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roller">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kullanicilar">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kullanicilar_Siniflar">
+          <End Role="Siniflar" Type="Self.Siniflar" Multiplicity="0..1" />
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siniflar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Kullanicilar">
+              <PropertyRef Name="Sinifi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BasvuruDurum" EntityType="Self.BasvuruDurum" />
+          <EntitySet Name="Basvurular" EntityType="Self.Basvurular" />
+          <EntitySet Name="BasvuruTuru" EntityType="Self.BasvuruTuru" />
+          <EntitySet Name="Belgeler" EntityType="Self.Belgeler" />
+          <EntitySet Name="BelgeTurleri" EntityType="Self.BelgeTurleri" />
+          <EntitySet Name="Bolumler" EntityType="Self.Bolumler" />
+          <EntitySet Name="Fakulteler" EntityType="Self.Fakulteler" />
+          <EntitySet Name="Komisyonlar" EntityType="Self.Komisyonlar" />
+          <EntitySet Name="KomisyonOgretmen" EntityType="Self.KomisyonOgretmen" />
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" />
+          <EntitySet Name="Roller" EntityType="Self.Roller" />
+          <EntitySet Name="Siniflar" EntityType="Self.Siniflar" />
+          <AssociationSet Name="FK_Basvurular_BasvuruDurum" Association="Self.FK_Basvurular_BasvuruDurum">
+            <End Role="BasvuruDurum" EntitySet="BasvuruDurum" />
+            <End Role="Basvurular" EntitySet="Basvurular" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basvurular_BasvuruTuru" Association="Self.FK_Basvurular_BasvuruTuru">
+            <End Role="BasvuruTuru" EntitySet="BasvuruTuru" />
+            <End Role="Basvurular" EntitySet="Basvurular" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basvurular_Kullanicilar" Association="Self.FK_Basvurular_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Basvurular" EntitySet="Basvurular" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Basvurular_Kullanicilar1" Association="Self.FK_Basvurular_Kullanicilar1">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Basvurular" EntitySet="Basvurular" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Belgeler_Basvurular" Association="Self.FK_Belgeler_Basvurular">
+            <End Role="Basvurular" EntitySet="Basvurular" />
+            <End Role="Belgeler" EntitySet="Belgeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Belgeler_BelgeTurleri" Association="Self.FK_Belgeler_BelgeTurleri">
+            <End Role="BelgeTurleri" EntitySet="BelgeTurleri" />
+            <End Role="Belgeler" EntitySet="Belgeler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bolumler_Fakulteler" Association="Self.FK_Bolumler_Fakulteler">
+            <End Role="Fakulteler" EntitySet="Fakulteler" />
+            <End Role="Bolumler" EntitySet="Bolumler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanicilar_Bolumler" Association="Self.FK_Kullanicilar_Bolumler">
+            <End Role="Bolumler" EntitySet="Bolumler" />
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KomisyonOgretmen_Komisyonlar" Association="Self.FK_KomisyonOgretmen_Komisyonlar">
+            <End Role="Komisyonlar" EntitySet="Komisyonlar" />
+            <End Role="KomisyonOgretmen" EntitySet="KomisyonOgretmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KomisyonOgretmen_Kullanicilar" Association="Self.FK_KomisyonOgretmen_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="KomisyonOgretmen" EntitySet="KomisyonOgretmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanicilar_Roller" Association="Self.FK_Kullanicilar_Roller">
+            <End Role="Roller" EntitySet="Roller" />
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanicilar_Siniflar" Association="Self.FK_Kullanicilar_Siniflar">
+            <End Role="Siniflar" EntitySet="Siniflar" />
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="BasvuruDurum">
+            <EntityTypeMapping TypeName="Model.BasvuruDurum">
+              <MappingFragment StoreEntitySet="BasvuruDurum">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DurumAdi" ColumnName="DurumAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Basvurular">
+            <EntityTypeMapping TypeName="Model.Basvurular">
+              <MappingFragment StoreEntitySet="Basvurular">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BasvuruTur" ColumnName="BasvuruTur" />
+                <ScalarProperty Name="BasvuranOgrenci" ColumnName="BasvuranOgrenci" />
+                <ScalarProperty Name="BasvuruDurumu" ColumnName="BasvuruDurumu" />
+                <ScalarProperty Name="DegerlendirenOgretmen" ColumnName="DegerlendirenOgretmen" />
+                <ScalarProperty Name="BasvuruTarih" ColumnName="BasvuruTarih" />
+                <ScalarProperty Name="BasariNotu" ColumnName="BasariNotu" />
+                <ScalarProperty Name="Donem" ColumnName="Donem" />
+                <ScalarProperty Name="Firma" ColumnName="Firma" />
+                <ScalarProperty Name="TarihAraligi" ColumnName="TarihAraligi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BasvuruTuru">
+            <EntityTypeMapping TypeName="Model.BasvuruTuru">
+              <MappingFragment StoreEntitySet="BasvuruTuru">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BasvuruAdi" ColumnName="BasvuruAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Belgeler">
+            <EntityTypeMapping TypeName="Model.Belgeler">
+              <MappingFragment StoreEntitySet="Belgeler">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BelgeAdresi" ColumnName="BelgeAdresi" />
+                <ScalarProperty Name="Basvuru" ColumnName="Basvuru" />
+                <ScalarProperty Name="BelgeTuru" ColumnName="BelgeTuru" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BelgeTurleri">
+            <EntityTypeMapping TypeName="Model.BelgeTurleri">
+              <MappingFragment StoreEntitySet="BelgeTurleri">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BelgeTuru" ColumnName="BelgeTuru" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bolumler">
+            <EntityTypeMapping TypeName="Model.Bolumler">
+              <MappingFragment StoreEntitySet="Bolumler">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BolumAdi" ColumnName="BolumAdi" />
+                <ScalarProperty Name="Fakulte" ColumnName="Fakulte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fakulteler">
+            <EntityTypeMapping TypeName="Model.Fakulteler">
+              <MappingFragment StoreEntitySet="Fakulteler">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FakulteAdi" ColumnName="FakulteAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Komisyonlar">
+            <EntityTypeMapping TypeName="Model.Komisyonlar">
+              <MappingFragment StoreEntitySet="Komisyonlar">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KomisyonAdi" ColumnName="KomisyonAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KomisyonOgretmen">
+            <EntityTypeMapping TypeName="Model.KomisyonOgretmen">
+              <MappingFragment StoreEntitySet="KomisyonOgretmen">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ogretmen" ColumnName="Ogretmen" />
+                <ScalarProperty Name="Komisyon" ColumnName="Komisyon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicilar">
+            <EntityTypeMapping TypeName="Model.Kullanicilar">
+              <MappingFragment StoreEntitySet="Kullanicilar">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TCNo" ColumnName="TCNo" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Sinifi" ColumnName="Sinifi" />
+                <ScalarProperty Name="Fotograf" ColumnName="Fotograf" />
+                <ScalarProperty Name="OkulSicilNo" ColumnName="OkulSicilNo" />
+                <ScalarProperty Name="Bolum" ColumnName="Bolum" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roller">
+            <EntityTypeMapping TypeName="Model.Roller">
+              <MappingFragment StoreEntitySet="Roller">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RolAdi" ColumnName="RolAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Siniflar">
+            <EntityTypeMapping TypeName="Model.Siniflar">
+              <MappingFragment StoreEntitySet="Siniflar">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Sinif" ColumnName="Sinif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

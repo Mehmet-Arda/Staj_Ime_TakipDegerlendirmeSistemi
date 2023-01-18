@@ -1,0 +1,24 @@
+﻿@using Staj_Ime_TakipDegerlendirmeSistemi.Models
+@model Kullanicilar
+
+<header>
+    <a href="/Teacher/Index" class="logo">@Model.Roller.RolAdi: @Model.Adi @Model.Soyadi</a>
+
+    <nav class="header-navbar">
+        <ul>
+            
+           
+            <li>
+                <a href="#"> <i class="fa-solid fa-user me-2"></i>Profil</a>
+                <ul class="drop-down">
+                    <li class="drop-down-item"><a class="drop-down-link" href="/Teacher/TeacherProfile">Ayarlar</a></li>
+                    <li class="drop-down-item"><a class="drop-down-link" href="/Teacher/Logout">Oturumu Kapat</a></li>
+
+                </ul>
+            </li>
+
+
+        </ul>
+    </nav>
+</header>
+

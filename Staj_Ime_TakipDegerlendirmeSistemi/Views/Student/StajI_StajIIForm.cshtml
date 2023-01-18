@@ -1,0 +1,564 @@
+﻿@using Staj_Ime_TakipDegerlendirmeSistemi.Models
+
+@model StajI_StajIIViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StajI-StajII Form</title>
+    <link href="~/Content/student_style.css" rel="stylesheet" />
+    <link rel="icon" href="~/files/ms-icon-310x310.png" type="image/x-icon">
+</head>
+<body class="student-index">
+    <div class="wrapper">
+
+        <div class="container">
+
+            @Html.Partial("_StudentHeaderPartialView", Model.ogrenci)
+
+
+
+            @using (Html.BeginForm("StajI_StajIIForm", "Student", FormMethod.Post))
+            {
+                <div class="row mt-5 fs-5">
+                    <b class="text-center">Öğrenci Bilgileri</b>
+                </div>
+
+
+                <div class="row mt-3 d-flex justify-content-center">
+
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.AdSoyad, new { @class = "form-control", autocomplete = "off", placeholder = "Ad Soyad" })
+                            @Html.LabelFor(x => x.AdSoyad)
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.Bolum, new { @class = "form-control", autocomplete = "off", placeholder = "Bölüm" })
+                            @Html.LabelFor(x => x.Bolum)
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row mt-3 d-flex justify-content-center">
+
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.Numara, new { @class = "form-control", autocomplete = "off", placeholder = "Numara" })
+                            @Html.LabelFor(x => x.Numara)
+                        </div>
+                    </div>
+
+
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.TCNo, new { @class = "form-control", autocomplete = "off", placeholder = "TCNo" })
+                            @Html.LabelFor(x => x.TCNo)
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="row mt-3 d-flex justify-content-center">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.EvTelGsm, new { @class = "form-control", autocomplete = "off", placeholder = "Ev/Tel Gsm" })
+                            @Html.LabelFor(x => x.EvTelGsm)
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.EPosta, new { @class = "form-control", autocomplete = "off", placeholder = "E-posta" })
+                            @Html.LabelFor(x => x.EPosta)
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="row mt-3 d-flex justify-content-center">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.Il, new { @class = "form-control", autocomplete = "off", placeholder = "İl" })
+                            @Html.LabelFor(x => x.Il)
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.Ilce, new { @class = "form-control", autocomplete = "off", placeholder = "İlçe" })
+                            @Html.LabelFor(x => x.Ilce)
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="row mt-3 d-flex justify-content-center">
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.PostaKodu, new { @class = "form-control", autocomplete = "off", placeholder = "Posta Kodu" })
+                            @Html.LabelFor(x => x.PostaKodu)
+                        </div>
+                    </div>
+
+
+                    <div class="col-1">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.Gun0, new { @class = "form-control", autocomplete = "off", placeholder = "Gün" })
+                            @Html.LabelFor(x => x.Gun0)
+                        </div>
+                    </div>
+
+
+                    <div class="col-1">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.Ay0, new { @class = "form-control", autocomplete = "off", placeholder = "Ay" })
+                            @Html.LabelFor(x => x.Ay0)
+                        </div>
+                    </div>
+
+
+                    <div class="col-1">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.Yil0, new { @class = "form-control", autocomplete = "off", placeholder = "Yil" })
+                            @Html.LabelFor(x => x.Yil0)
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row mt-5 fs-4">
+                    <b class="text-center">Staj Bilgileri</b>
+                </div>
+
+
+                <div class="row mt-3 fs-5">
+                    <b class="text-center">Staj Başlangıç</b>
+                </div>
+
+                <div class="row mt-4 d-flex justify-content-center">
+
+                    <div class="col-1">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.StajBaslangicGun, new { @class = "form-control", autocomplete = "off", placeholder = "Gün" })
+                            @Html.LabelFor(x => x.StajBaslangicGun)
+                        </div>
+                    </div>
+
+
+                    <div class="col-1">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.StajBaslangicAy, new { @class = "form-control", autocomplete = "off", placeholder = "Ay" })
+                            @Html.LabelFor(x => x.StajBaslangicAy)
+                        </div>
+                    </div>
+
+
+                    <div class="col-1">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.StajBaslangicYil, new { @class = "form-control", autocomplete = "off", placeholder = "Yıl" })
+                            @Html.LabelFor(x => x.StajBaslangicYil)
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+                <div class="row mt-4 fs-5">
+                    <b class="text-center">Staj Bitiş</b>
+                </div>
+
+                <div class="row mt-4 d-flex justify-content-center">
+
+
+                    <div class="col-1">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.StajBitisGun, new { @class = "form-control", autocomplete = "off", placeholder = "Gün" })
+                            @Html.LabelFor(x => x.StajBitisGun)
+                        </div>
+                    </div>
+
+                    <div class="col-1">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.StajBitisAy, new { @class = "form-control", autocomplete = "off", placeholder = "Ay" })
+                            @Html.LabelFor(x => x.StajBitisAy)
+                        </div>
+                    </div>
+
+
+                    <div class="col-1">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.StajBitisYil, new { @class = "form-control", autocomplete = "off", placeholder = "Yıl" })
+                            @Html.LabelFor(x => x.StajBitisYil)
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+
+                <div class="row mt-5 d-flex justify-content-center">
+
+                    <div class="col-1 d-flex">
+                        @*Staj-I &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check1, "Seçim1")*@
+
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check1, "Seçim1",new {@class="form-check-input" })
+                          
+                            <label class="form-check-label" for="check1">
+                                Staj-I
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-1 d-flex">
+                        @*Staj-II &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check1, "Seçim2")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check1, "Seçim2", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check1">
+                                Staj-II
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="row mt-5 d-flex justify-content-center">
+                    <div class="col-8 text-end">
+                        Ailemden, Kendimden veya Anne-Baba Üzarinden
+                        Genel Sağlık Sigortası Kapsamında Sağlık Hizmeti Alıyorum
+
+                    </div>
+                    <div class="col-1 d-flex">
+                        @*Evet &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check2, "Seçim1")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check2, "Seçim1", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check2">
+                                Evet
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-1 d-flex">
+                        @*Hayır &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check2, "Seçim2")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check2, "Seçim2", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check2">
+                                Hayır
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row mt-5 d-flex justify-content-center">
+                    <div class="col-8 text-end">
+                        Genel Sağlık Sigortası (GSS) (Gelir Testi Yaptırdım Pirim Ödüyorum)
+                    </div>
+                    <div class="col-1 d-flex">
+                        @*Evet &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check3, "Seçim1")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check3, "Seçim1", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check3">
+                                Evet
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-1 d-flex">
+                        @*Hayır &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check3, "Seçim2")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check3, "Seçim2", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check3">
+                                Hayır
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="row mt-5 d-flex justify-content-center">
+                    <div class="col-8 text-end">
+                        25 Yaşını Doldurdum
+                    </div>
+                    <div class="col-1 d-flex">
+                        @*Evet &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check4, "Seçim1")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check4, "Seçim1", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check4">
+                                Evet
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-1 d-flex">
+                        @*Hayır &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check4, "Seçim2")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check4, "Seçim2", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check4">
+                                Hayır
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+                <div class="row mt-5 fs-5">
+                    <b class="text-center">Kurum Bilgileri:</b>
+                </div>
+
+
+
+
+                <div class="row mt-3 d-flex justify-content-center">
+
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.KurumResmiAd, new { @class = "form-control", autocomplete = "off", placeholder = "Resmi Adı" })
+                            @Html.LabelFor(x => x.KurumResmiAd)
+                        </div>
+                    </div>
+
+
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.KurumFaaliyetAlani, new { @class = "form-control", autocomplete = "off", placeholder = "Faaliyet Alanı" })
+                            @Html.LabelFor(x => x.KurumFaaliyetAlani)
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="row mt-3 d-flex justify-content-center">
+
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.KurumIl, new { @class = "form-control", autocomplete = "off", placeholder = "İl" })
+                            @Html.LabelFor(x => x.KurumIl)
+                        </div>
+                    </div>
+
+
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.KurumIlce, new { @class = "form-control", autocomplete = "off", placeholder = "İlçe" })
+                            @Html.LabelFor(x => x.KurumIlce)
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="row mt-3 d-flex justify-content-center">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.KurumPostaKodu, new { @class = "form-control", autocomplete = "off", placeholder = "Posta Kodu" })
+                            @Html.LabelFor(x => x.KurumPostaKodu)
+                        </div>
+                    </div>
+
+
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.KurumTelefon, new { @class = "form-control", autocomplete = "off", placeholder = "Telefon" })
+                            @Html.LabelFor(x => x.KurumTelefon)
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="row mt-3 d-flex justify-content-center">
+
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.KurumFaks, new { @class = "form-control", autocomplete = "off", placeholder = "Faks" })
+                            @Html.LabelFor(x => x.KurumFaks)
+                        </div>
+                    </div>
+
+
+                    <div class="col-3">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(x => x.KurumEPosta, new { @class = "form-control", autocomplete = "off", placeholder = "E-posta" })
+                            @Html.LabelFor(x => x.KurumEPosta)
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="row mt-5 d-flex justify-content-center">
+                    <div class="col-6 text-end">
+                        Staj Sorumlusunun Unvanı
+                    </div>
+                    <div class="col-2 d-flex justify-content-end">
+                        @*Mühendis &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check5, "Seçim1")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check5, "Seçim1", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check5">
+                                Mühendis
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-2 d-flex justify-content-center">
+                        @*Teknik Öğretmen &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check5, "Seçim2")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check5, "Seçim2", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check5">
+                                Teknik Öğretmen
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-2 d-flex">
+                        @*Hekim &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check5, "Seçim3")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check5, "Seçim3", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check5">
+                                Hekim
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+                <div class="row mt-5 d-flex justify-content-center">
+                    <div class="col-8 text-end">
+                        Kurum olarak 3308 sayılı kanundaki devlet katkısından yararlanmak istiyor musunuz?
+                    </div>
+                    <div class="col-1 d-flex justify-content-center">
+                        @*Evet &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check6, "Seçim1")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check6, "Seçim1", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check6">
+                                Evet
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="col-1 d-flex justify-content-center">
+                        @*Hayır &nbsp;&nbsp; @Html.RadioButtonFor(x => x.check6, "Seçim2")*@
+                        <div class="form-check">
+                            @Html.RadioButtonFor(x => x.check6, "Seçim2", new { @class = "form-check-input" })
+
+                            <label class="form-check-label" for="check6">
+                                Hayır
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+                <div class="row mt-5 mb-5 d-flex justify-content-center">
+                    <div class="col-3 text-center">
+                        <button class="pdfCreateButton" type="submit">Başvuru PDF'ini Oluştur</button>
+                    </div>
+
+                </div>
+
+
+
+             }
+
+
+
+
+
+        </div>
+
+
+        @Html.Partial("_StudentFooterPartialView")
+
+
+
+    </div>
+
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+
+
+
+    </script>
+</body>
+</html>

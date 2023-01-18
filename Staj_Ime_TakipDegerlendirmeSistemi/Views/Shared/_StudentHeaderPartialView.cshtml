@@ -1,0 +1,32 @@
+﻿@using Staj_Ime_TakipDegerlendirmeSistemi.Models
+@model Kullanicilar
+
+<header>
+    <a href="/Student/Index" class="logo">Öğrenci: @Model.Adi @Model.Soyadi</a>
+
+    <nav class="header-navbar">
+        <ul>
+            <li>
+
+                <a href="#"> <i class="fa-solid fa-folder-tree me-2"></i>İşlemler</a>
+                <ul class="drop-down">
+                    <li class="drop-down-item"><a class="drop-down-link" href="/Student/StajI_StajIIForm">Staj-I/StajII</a></li>
+                    <li class="drop-down-item"><a class="drop-down-link" href="#">IME</a></li>
+                </ul>
+            </li>
+            <li>
+
+                <a href="/Student/BasvuruOlustur"><i class="fa-solid fa-file-circle-plus me-2"></i>Başvurular</a>
+
+            <li>
+
+                <a href="#"> <i class="fa-solid fa-user me-2"></i>Profil</a>
+                <ul class="drop-down">
+                    <li class="drop-down-item"><a class="drop-down-link" href="/Student/StudentProfile">Ayarlar</a></li>
+                    <li class="drop-down-item"><a class="drop-down-link" href="/Student/Logout">Oturumu Kapat</a></li>
+
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>

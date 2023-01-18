@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32802.440
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Staj_Ime_TakipDegerlendirmeSistemi", "Staj_Ime_TakipDegerlendirmeSistemi\Staj_Ime_TakipDegerlendirmeSistemi.csproj", "{CD6A7DC7-6C68-4C00-85A8-2E481BA10786}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD6A7DC7-6C68-4C00-85A8-2E481BA10786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD6A7DC7-6C68-4C00-85A8-2E481BA10786}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD6A7DC7-6C68-4C00-85A8-2E481BA10786}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD6A7DC7-6C68-4C00-85A8-2E481BA10786}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE62960D-6A60-482E-A42A-AEC3F22104A3}
+	EndGlobalSection
+EndGlobal
